@@ -175,6 +175,7 @@ return [
         'Dowilcox\KnpMenu\MenuServiceProvider',
         'Ottowayne\LangCheck\LangCheckServiceProvider',
         'Cmgmyr\Messenger\MessengerServiceProvider',
+        'Ottowayne\SQLiteMigrationFix\DatabaseServiceProvider',
 
         // in-app packages, may be excluded sometimes later
         'Vain\Packages\RealmAPI\Providers\RealmApiServiceProvider',
