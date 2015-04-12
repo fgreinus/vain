@@ -43,7 +43,7 @@ class Handler extends ExceptionHandler {
 //        if ($request->isXmlHttpRequest())
 //            return $this->renderXmlHttpException($e);
 
-        if (config('app.debug'))
+        if (config('app.debug') && !app()->environment('testing'))
         {
             if ($request->isXmlHttpRequest())
                 return $this->renderDebugXmlHttpException($e);

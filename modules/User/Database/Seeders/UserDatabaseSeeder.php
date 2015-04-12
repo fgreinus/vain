@@ -19,11 +19,11 @@ class UserDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         $this->call('Modules\User\Database\Seeders\UserTableSeeder');
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
 
