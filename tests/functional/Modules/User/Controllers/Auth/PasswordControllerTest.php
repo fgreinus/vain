@@ -1,63 +1,55 @@
 <?php namespace Tests\Functional\Modules\User\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Mockery;
-use Modules\User\Entities\User;
 use Tests\TestCase;
+use Tests\Traits\PasswordTrait;
+use Tests\Traits\UserTrait;
 
-/**
- * Created by PhpStorm.
- * User: Otto
- * Date: 12.04.2015
- * Time: 01:27
- */
 class PasswordControllerTest extends TestCase
 {
+
+    use PasswordTrait, UserTrait;
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        Mockery::close();
+    }
 
     /**
      * @test
      * @covers Modules\User\Http\Controllers\Auth\PasswordController::postEmail
      * @covers Modules\User\Http\Controllers\Auth\PasswordController::postReset
-     * @group current
      */
-//    public function user_can_reset_password()
-//    {
-//        $inputData = [
-//            'email'                 => 'admin@vain.app',
-//            'password'              => '123456',
-//            'password_confirmation' => '123456',
-//        ];
-//
-//        Mail::shouldReceive('send')->once();
-//
-//        $this->visit('password/email')
-//            ->fill('admin@vain.app', 'email')
-//            ->press('Absenden')
-//            ->onPage('password/email')
-//            ->assertSessionHas('status');
-//
-//        $user = User::whereEmail($inputData['email'])->first();
-//
-//        $this->visit('password/reset/' . $user->remember_token)
-//            ->fill($inputData['email'], 'email')
-//            ->fill($inputData['password'], 'password')
-//            ->fill($inputData['password_confirmation'], 'password_confirmation')
-//            ->press('submit_password_reset')
-//            ->onPage(URL::route('index'));
-//    }
+    public function it_resets_a_users_password()
+    {
+        $this->createUser($credentials = ['email' => 'foo@vain.app']);
+
+        Mail::shouldReceive('send')->once();
+
+        // request mail with password reset token
+        $this->requestResetLink($credentials)
+            ->seeInDatabase('password_resets', $credentials)
+            ->assertSessionHas('status');
+
+        // reset password with token
+        $token = DB::table('password_resets')->where('email', $credentials['email'])->pluck('token');
+        $this->resetPassword($credentials += ['password' => 'newpassword', 'token' => $token])
+            ->onPage(URL::route('index.home'))
+            ->assertTrue(Auth::check());
+    }
 
     /**
      * @test
      * @covers Modules\User\Http\Controllers\Auth\PasswordController::postEmail
      */
-    public function user_can_not_request_password_reset_link_if_mail_not_present()
+    public function it_notifies_a_user_of_password_reset_errors()
     {
-        Mail::shouldReceive('send')->never();
-
-        $this->visit('password/email')
-            ->fill('nonexisting@vain.app', 'email')
-            ->press('Absenden')
+        $this->requestResetLink(['email' => 'nonexisting@vain.app'])
             ->onPage('password/email')
             ->assertSessionHasErrors('email');
     }
@@ -66,19 +58,21 @@ class PasswordControllerTest extends TestCase
      * @test
      * @covers Modules\User\Http\Controllers\Auth\PasswordController::postReset
      */
-    public function user_can_not_reset_password_with_invalid_data()
+    public function it_does_not_reset_a_password_when_given_a_wrong_token()
     {
-        $inputData = [
-            'email'                 => 'nonexisting@vain.app',
-            'password'              => '123456',
-            'password_confirmation' => '123456',
-            'token'                 => 'token321',
-        ];
+        $this->createUser($credentials = ['email' => 'foo@vain.app']);
 
-        $this->visit('password/reset/' . $inputData['token'])
-            ->fillForm('Passwort', $inputData);
-        $this->press('Passwort')
-            ->onPage('password/reset/' . $inputData['token'])
+        Mail::shouldReceive('send')->once();
+
+        // request mail with password reset token
+        $this->requestResetLink($credentials)
+            ->seeInDatabase('password_resets', $credentials)
+            ->assertSessionHas('status');
+
+        // reset password with token
+        $token = 'somewrongtoken';
+        $this->resetPassword($credentials + ['password' => 'newpassword', 'token' => $token])
+            ->onPage('password/reset/' . $token)
             ->assertSessionHasErrors('email');
     }
 

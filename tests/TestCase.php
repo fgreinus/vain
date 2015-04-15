@@ -25,9 +25,9 @@ class TestCase extends IntegrationTest {
         parent::setUp();
 
         Artisan::call('module:migrate');
-        Artisan::call('db:seed');
-
-        Artisan::call('module:seed', ['module' => 'user']);
+//        Artisan::call('db:seed');
+//
+//        Artisan::call('module:seed', ['module' => 'user']);
 //        Artisan::call('module:seed', ['module' => 'site']);
 //        Artisan::call('module:seed', ['module' => 'blog']);
 

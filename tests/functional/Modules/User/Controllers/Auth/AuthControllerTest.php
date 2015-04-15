@@ -1,108 +1,97 @@
 <?php namespace Tests\Functional\Modules\User\Controllers\Auth;
 
 use Auth;
-use Illuminate\Support\Facades\Session;
-use Mockery;
-use Modules\User\Entities\User;
+use Tests\Traits\AuthTrait;
 use Tests\TestCase;
+use Tests\Traits\UserTrait;
 use URL;
 
-/**
- * Created by PhpStorm.
- * User: Otto
- * Date: 11.04.2015
- * Time: 15:44
- */
 class AuthControllerTest extends TestCase
 {
+
+    use AuthTrait, UserTrait;
 
     /**
      * @test
      * @covers Modules\User\Http\Controllers\Auth\AuthController::postLogin
      */
-    public function user_can_login()
+    public function it_logs_a_user_in()
     {
-        // make sure account is valid
-        $this->assertTrue(Auth::attempt(['email' => 'admin@vain.app', 'password' => '123456'], false, false));
+        $this->createUser(['email' => 'foo@vain.app', 'password' => bcrypt('123456')]);
 
-        $this->visit('auth/login')
-            ->see('Anmelden')
-            ->fill('admin@vain.app', 'email')
-            ->fill('123456', 'password')
-            ->press('Anmelden')
-            ->onPage('/home')
-            ->see('You are logged in');
-
-        $this->assertTrue(Auth::check());
+        $this->login(['email' => 'foo@vain.app', 'password' => '123456'])
+            ->onPage(URL::route('index.home'));
     }
 
     /**
      * @test
      * @covers Modules\User\Http\Controllers\Auth\AuthController::postLogin
      */
-    public function user_can_not_login_with_invalid_data()
+    public function it_notifies_a_user_of_login_errors()
     {
-        // make sure account is valid
-        $this->assertTrue(Auth::attempt(['email' => 'admin@vain.app', 'password' => '123456'], false, false));
-
-        $this->visit('auth/login')
-            ->see('Anmelden')
-            ->fill('admin@vain.app', 'email')
-            ->fill('654321', 'password')
-            ->press('Anmelden')
-            ->onPage('auth/login');
-
-        $this->assertSessionHasErrors('email');
-        $this->assertTrue(Auth::guest());
+        $this->login(['email' => 'foo@vain.app', 'password' => '123456'])
+            ->assertSessionHasErrors('email');
     }
 
     /**
      * @test
      * @covers Modules\User\Http\Controllers\Auth\AuthController::getLogout
      */
-    public function user_can_logout()
+    public function it_logs_a_user_out()
     {
-        $this->assertTrue(Auth::attempt(['email' => 'admin@vain.app', 'password' => '123456']));
+        $this->be($this->createUser());
 
-        $this->visit('auth/logout')
+        $this->logout()
             ->onPage(URL::route('index'));
 
         $this->assertTrue(Auth::guest());
     }
 
-    // ToDo: add locale input to registration form
-//    /**
-//     * @test
-//     * @covers Modules\User\Http\Controllers\Auth\AuthController::postRegister
-//     * @group integrated
-//     */
-//    public function guest_can_register()
-//    {
-//        $userData = [
-//            'name'                  => 'Hanspeter',
-//            'email'                 => 'hanspeter@vain.app',
-//            'password'              => '123456',
-//            'password_confirmation' => '123456',
-//            'locale'                => 'de',
-//        ];
-//
-//        $mockedUser = Mockery::mock('User');
-//        $mockedUser->shouldReceive('create')->once()->andReturn(null);
-//
-//        $this->visit('auth/register')
-//            ->fillform('Registrieren', $userData)
-//            ->press('Registrieren')
-//            ->onPage('/home');
-//    }
+    /**
+     * @test
+     * @covers Modules\User\Http\Controllers\Auth\AuthController::postRegister
+     */
+    public function it_registers_a_user()
+    {
+        $credentials = ['email' => 'foo@vain.app'];
+
+        $this->register($credentials)
+            ->verifyInDatabase('users', $credentials)
+            ->seePageIs('/home');
+    }
+
+    /**
+     * @test
+     * @covers Modules\User\Http\Controllers\Auth\AuthController::postRegister
+     */
+    public function it_notifies_a_user_of_registration_errors()
+    {
+        $this->createUser($overrides = ['email' => 'foo@vain.app']);
+
+        $this->register($overrides)
+            ->onPage('auth/register')
+            ->assertSessionHasErrors('email');
+    }
 
     /**
      * @test
      */
-    public function guest_can_not_access_protected_routes()
+    public function it_prevents_a_user_from_accessing_protected_routes()
     {
         // user profile as example for auth middleware
         $this->visit(URL::route('user.profile', ['id' => 1]))
             ->onPage('auth/login');
     }
+
+    // ToDo: admin middleware NYI
+//    /**
+//     * @test
+//     */
+//    public function it_prevents_a_user_from_accessing_the_backend()
+//    {
+//        $this->be($this->createUser());
+//
+//        $this->visit(URL::route('user.admin.users.index'));
+//    }
 
 }

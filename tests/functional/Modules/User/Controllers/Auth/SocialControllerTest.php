@@ -7,7 +7,10 @@ class SocialControllerTest extends TestCase
 
     // ToDo
 
-    public function test_true()
+    /**
+     * @test
+     */
+    public function it_is_true()
     {
         $this->assertTrue(true);
     }
