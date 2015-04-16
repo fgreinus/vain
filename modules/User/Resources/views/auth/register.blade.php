@@ -54,6 +54,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-md-4 control-label">@lang('user::profile.field.locale')</label>
+                            <div class="col-md-6">
+                                <select name="locale" class="form-control">
+                                    <option value="de">Deutsch</option>
+                                    <option value="en">Englisch</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('user::auth.action.register')

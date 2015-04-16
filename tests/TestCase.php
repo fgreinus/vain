@@ -1,6 +1,12 @@
-<?php
+<?php namespace Tests;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
+use Illuminate\Support\Facades\Session;
+use Laracasts\Integrated\Extensions\Laravel as IntegrationTest;
+use Laracasts\Integrated\Services\Laravel\DatabaseTransactions;
+
+class TestCase extends IntegrationTest {
+
+    use DatabaseTransactions;
 
     /**
      * Creates the application.

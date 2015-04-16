@@ -47,22 +47,7 @@ class Registrar implements RegistrarContract {
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'birthday_at' => $data['birthday_at'],
             'locale' => $data['locale'],
-            'gender' => $data['gender'],
-            'city' => $data['city'],
-            'profession' => $data['profession'],
-            'hobbies' => $data['hobbies'],
-            'homepage' => $data['homepage'],
-            'skype' => $data['skype'],
-            'facebook' => $data['facebook'],
-            'twitter' => $data['twitter'],
-            'main_character' => $data['main_character'],
-            'main_guild' => $data['main_guild'],
-            'favorite_race' => $data['favorite_race'],
-            'favorite_spec' => $data['favorite_spec'],
-            'favorite_instance' => $data['favorite_instance'],
-            'favorite_battleground' => $data['favorite_battleground'],
         ]);
 
         return $user;
