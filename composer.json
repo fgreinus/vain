@@ -24,7 +24,6 @@
         "benconstable/phpspec-laravel": "~2.0",
         "mockery/mockery": "0.9.*",
         "php-vcr/php-vcr": "1.*",
-        "ottowayne/sqlite-migration-fix": "dev-master",
         "laracasts/integrated": "0.11.*"
     },
     "autoload": {

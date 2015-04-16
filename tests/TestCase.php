@@ -1,10 +1,12 @@
 <?php namespace Tests;
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Laracasts\Integrated\Extensions\Laravel as IntegrationTest;
+use Laracasts\Integrated\Services\Laravel\DatabaseTransactions;
 
 class TestCase extends IntegrationTest {
+
+    use DatabaseTransactions;
 
     /**
      * Creates the application.
@@ -18,21 +20,6 @@ class TestCase extends IntegrationTest {
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
         return $app;
-    }
-
-    public function setUp()
-    {
-        parent::setUp();
-
-        Artisan::call('module:migrate');
-//        Artisan::call('db:seed');
-//
-//        Artisan::call('module:seed', ['module' => 'user']);
-//        Artisan::call('module:seed', ['module' => 'site']);
-//        Artisan::call('module:seed', ['module' => 'blog']);
-
-        // required for csrf middleware
-        Session::start();
     }
 
 }

@@ -31,6 +31,7 @@ before_script:
   - mysql -e 'create database vain;'
   - gulp
   - php artisan module:migrate --force
+  - php artisan db:seed --force
 
 script: vendor/bin/phpunit
 
