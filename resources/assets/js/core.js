@@ -94,6 +94,19 @@
         });
 
         $('[data-select]').selectpicker();
+
+        $('[data-tags]').each(function() {
+
+            var element = $(this);
+            element.tagsinput({
+                confirmKeys: [13, 32, 188],                  // 13 = enter, 32 = space, 188 = ,
+                maxTags: element.data('tags-max'),
+                trimValue: typeof element.data('tags-trim') !== 'undefined',
+                allowDuplicates: typeof element.data('tags-allow-duplicates') !== 'undefined',
+                maxChars: typeof element.data('tags-max-chars') !== 'undefined' ? element.data('tags-max-chars') : undefined,
+                tagClass: typeof element.data('tags-class') !== 'undefined' ? element.data('tags-class') : undefined
+            });
+        });
     };
 
     $(function() {

@@ -74,6 +74,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('Modules\Blog\Entities\Comment');
     }
 
+    public function chartrans()
+    {
+        return $this->hasOne('Modules\Chartrans\Entities\Request');
+    }
+
     /**
      * queries all possible online users
      *

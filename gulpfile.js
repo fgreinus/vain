@@ -4,7 +4,8 @@ var watch_paths = [
     'modules/Blog/Resources/assets/**',
     'modules/Site/Resources/assets/**',
     'modules/User/Resources/assets/**',
-    'modules/Message/Resources/assets/**'
+    'modules/Message/Resources/assets/**',
+    'modules/Chartrans/Resources/assets/**'
 ];
 
 var scripts_include = [
@@ -18,6 +19,7 @@ var scripts_include = [
     './bower_components/toastr/toastr.js',
     './bower_components/bootstrap-select/dist/js/bootstrap-select.js',
     './bower_components/emojify.js/dist/js/emojify.js',
+    './bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
 
     /*
      |--------------------------------------------------------------------------
@@ -38,7 +40,8 @@ var scripts_include = [
     //'./modules/Forum/Resources/assets/js/*.js',
     //'./modules/Site/Resources/assets/js/*.js',
     //'./modules/User/Resources/assets/js/*.js',
-    './modules/Message/Resources/assets/js/*.js'
+    './modules/Message/Resources/assets/js/*.js',
+    './modules/Chartrans/Resources/assets/js/chartrans.js',
 ];
 
 var scripts_admin_include = [
@@ -90,6 +93,7 @@ elixir(function(mix) {
 
     // copy images
     mix.copy('./bower_components/emojify.js/dist/images/basic', 'public/static/images/emojify');
+    mix.copy('./modules/Chartrans/Resources/assets/images', 'public/static/images/chartrans');
 
     // copy admin statics
     //mix.copy('./bower_components/admin-lte/plugins', 'public/static/plugins');

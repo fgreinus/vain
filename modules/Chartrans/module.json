@@ -1,0 +1,16 @@
+{
+    "name": "Chartrans",
+    "alias": "chartrans",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 6,
+    "providers": [
+        "Modules\\Chartrans\\Providers\\ChartransServiceProvider",
+        "Modules\\Chartrans\\Providers\\EventServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

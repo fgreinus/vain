@@ -14,8 +14,8 @@ return [
 
     'emulators' => [
 
-        'trinity' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_TRINITY,
-        'mangos' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_MANGOS,
+        'wotlk' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_TRINITY,
+        'tbc' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_MANGOS,
 
     ],
 
@@ -34,12 +34,12 @@ return [
 
     'databases' => [
 
-        'trinity' => [
+        'wotlk' => [
             'characters' => 'trinity_characters',
             'dynamics' => 'trinity_dynamics',
         ],
 
-        'mangos' => [
+        'tbc' => [
             'characters' => 'mangos_characters',
             'dynamics' => 'mangos_dynamics',
         ],
@@ -58,7 +58,7 @@ return [
 
     'soap' => [
 
-        'trinity' => [
+        'wotlk' => [
             'host' => env('TRINITY_SOAP_HOST'),
             'port' => env('TRINITY_SOAP_PORT'),
             'username' => env('TRINITY_SOAP_USERNAME'),
@@ -66,7 +66,7 @@ return [
             'urn' => 'TC',
         ],
 
-        'mangos' => [
+        'tbc' => [
             'host' => env('MANGOS_SOAP_HOST'),
             'port' => env('MANGOS_SOAP_PORT'),
             'username' => env('MANGOS_SOAP_USERNAME'),

@@ -7,6 +7,7 @@
     "toastr": "*",
     "bootstrap-select": "*",
     "font-awesome": "*",
-    "emojify.js": "~1.0.1"
+    "emojify.js": "~1.0.1",
+    "bootstrap-tagsinput": "*"
   }
 }
