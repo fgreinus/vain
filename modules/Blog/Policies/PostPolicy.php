@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Policies;
+<?php
+
+namespace Modules\Blog\Policies;
 
 use Modules\Blog\Entities\Post;
 use Modules\User\Entities\User;
@@ -6,9 +8,9 @@ use Vain\Policies\Policy;
 
 class PostPolicy extends Policy
 {
-
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function index($user)
@@ -19,6 +21,7 @@ class PostPolicy extends Policy
     /**
      * @param User $user
      * @param Post $post
+     *
      * @return bool
      */
     public function show($user, $post)
@@ -30,6 +33,7 @@ class PostPolicy extends Policy
     /**
      * @param User $user
      * @param Post $post
+     *
      * @return bool
      */
     public function edit($user, $post)
@@ -40,6 +44,7 @@ class PostPolicy extends Policy
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function create($user)
@@ -50,6 +55,7 @@ class PostPolicy extends Policy
     /**
      * @param User $user
      * @param Post $post
+     *
      * @return bool
      */
     public function destroy($user, $post)

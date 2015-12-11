@@ -56,7 +56,7 @@ interface RoleInterface
     public function attachPermissions($permissions);
 
     /**
-     * Detach multiple permissions from current role
+     * Detach multiple permissions from current role.
      *
      * @param mixed $permissions
      *

@@ -1,11 +1,13 @@
-<?php namespace Modules\User\Http\Controllers\Auth;
+<?php
 
+namespace Modules\User\Http\Controllers\Auth;
+
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Vain\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class PasswordController extends Controller {
-
+class PasswordController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -24,7 +26,6 @@ class PasswordController extends Controller {
      */
     public function __construct()
     {
-
         $this->middleware('guest');
     }
 
@@ -33,11 +34,10 @@ class PasswordController extends Controller {
         return view('user::auth.password');
     }
 
-    public function getReset( $token = null )
+    public function getReset($token = null)
     {
-        if (is_null($token))
-        {
-            throw new NotFoundHttpException;
+        if (is_null($token)) {
+            throw new NotFoundHttpException();
         }
 
         return view('user::auth.reset')->with('token', $token);

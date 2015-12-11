@@ -1,4 +1,6 @@
-<?php namespace Vain\Exceptions;
+<?php
+
+namespace Vain\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -7,15 +9,15 @@ use Illuminate\Http\Response;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as Whoops;
 
-class Handler extends ExceptionHandler {
-
+class Handler extends ExceptionHandler
+{
     /**
      * A list of the exception types that should not be reported.
      *
      * @var array
      */
     protected $dontReport = [
-        'Symfony\Component\HttpKernel\Exception\HttpException'
+        'Symfony\Component\HttpKernel\Exception\HttpException',
     ];
 
     /**
@@ -23,7 +25,8 @@ class Handler extends ExceptionHandler {
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $e
+     * @param \Exception $e
+     *
      * @return void
      */
     public function report(Exception $e)
@@ -34,19 +37,20 @@ class Handler extends ExceptionHandler {
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $e
+     *
      * @return Response
      */
     public function render($request, Exception $e)
     {
-//        if ($request->isXmlHttpRequest())
+        //        if ($request->isXmlHttpRequest())
 //            return $this->renderXmlHttpException($e);
 
-        if (config('app.debug'))
-        {
-            if ($request->isXmlHttpRequest())
+        if (config('app.debug')) {
+            if ($request->isXmlHttpRequest()) {
                 return $this->renderDebugXmlHttpException($e);
+            }
 
             return $this->renderExceptionWithWhoops($e);
         }
@@ -57,12 +61,13 @@ class Handler extends ExceptionHandler {
     /**
      * Render an exception using Whoops.
      *
-     * @param  \Exception $e
+     * @param \Exception $e
+     *
      * @return Response
      */
     protected function renderExceptionWithWhoops(Exception $e)
     {
-        $whoops = new Whoops;
+        $whoops = new Whoops();
         $whoops->pushHandler(new PrettyPageHandler());
 
         return new Response(
@@ -73,9 +78,10 @@ class Handler extends ExceptionHandler {
     }
 
     /**
-     * Renders an exception from ajax requests
+     * Renders an exception from ajax requests.
      *
      * @param \Exception $e
+     *
      * @return JsonResponse
      */
     protected function renderXmlHttpException($e)
@@ -85,8 +91,7 @@ class Handler extends ExceptionHandler {
             'message' => $e->getMessage(),
         ];
 
-        if ($e instanceof HttpException)
-        {
+        if ($e instanceof HttpException) {
             return new JsonResponse($data, $e->getStatusCode());
         }
 
@@ -95,9 +100,10 @@ class Handler extends ExceptionHandler {
 
     /**
      * Renders an exception from ajax requests
-     * Only use this in debug mode
+     * Only use this in debug mode.
      *
      * @param \Exception $e
+     *
      * @return JsonResponse
      */
     protected function renderDebugXmlHttpException($e)
@@ -105,11 +111,10 @@ class Handler extends ExceptionHandler {
         // handle our ajax errors
         $data = [
             'message' => $e->getMessage(),
-            'trace' => $e->getTrace(),
+            'trace'   => $e->getTrace(),
         ];
 
-        if ($e instanceof HttpException)
-        {
+        if ($e instanceof HttpException) {
             return new JsonResponse($data, $e->getStatusCode());
         }
 

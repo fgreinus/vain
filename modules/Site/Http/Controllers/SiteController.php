@@ -1,15 +1,17 @@
-<?php namespace Modules\Site\Http\Controllers;
+<?php
+
+namespace Modules\Site\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Site\Entities\Page;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class SiteController extends Controller {
-
+class SiteController extends Controller
+{
     /**
      * @param Request $request
      * @param $slug
+     *
      * @return $this
      */
     public function getPage(Request $request, $slug)
@@ -18,9 +20,8 @@ class SiteController extends Controller {
             ->where('slug', $slug)
             ->first();
 
-        if ($page === null)
-        {
-            app()->abort(404, 'page with slug \''. $slug .'\' not found');
+        if ($page === null) {
+            app()->abort(404, 'page with slug \''.$slug.'\' not found');
         }
 
 //        if (!empty($page->role) && !$request->user()->hasRole($page->role))

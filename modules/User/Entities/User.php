@@ -1,18 +1,20 @@
-<?php namespace Modules\User\Entities;
+<?php
+
+namespace Modules\User\Entities;
 
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;
 use Vain\Packages\Access\Contracts\UserInterface as UserContract;
 use Vain\Packages\Access\Traits\UserTrait;
 
-class User extends Model implements UserContract, AuthenticatableContract, CanResetPasswordContract {
-
+class User extends Model implements UserContract, AuthenticatableContract, CanResetPasswordContract
+{
     use UserTrait, Authenticatable, CanResetPassword, SoftDeletes, LocalizedEloquentTrait;
 
     /**
@@ -48,7 +50,7 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
         'favorite_class',
         'favorite_spec',
         'favorite_instance',
-        'favorite_battleground'
+        'favorite_battleground',
     ];
 
     /**
@@ -66,7 +68,7 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
     protected $dates = ['deleted_at', 'birthday_at', 'last_active_at'];
 
     /**
-     * created static pages
+     * created static pages.
      */
     public function sites()
     {
@@ -89,9 +91,10 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
     }
 
     /**
-     * queries all possible online users
+     * queries all possible online users.
      *
      * @param $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function scopeOnline($query)
@@ -104,9 +107,10 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
     }
 
     /**
-     * accessor for current online state
+     * accessor for current online state.
      *
      * @param $value
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function getOnlineAttribute($value)
@@ -114,14 +118,15 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
         $expiryDate = Carbon::now()
             ->subMinutes(config('session.lifetime'));
 
-        return ( ! $this->logged_out)
+        return (!$this->logged_out)
             && $expiryDate->lt($this->last_active_at);
     }
 
     /**
-     * accessor for the users avatar
+     * accessor for the users avatar.
      *
      * @param $value
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function getAvatarAttribute($value)
@@ -130,7 +135,7 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getAvatar()
     {
@@ -144,7 +149,8 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
      * Save the model to the database without updating
      * the timestamps.
      *
-     * @param  array  $options
+     * @param array $options
+     *
      * @return bool
      */
     public function saveWithoutTimestamps(array $options = [])
@@ -156,8 +162,10 @@ class User extends Model implements UserContract, AuthenticatableContract, CanRe
     }
 
     /**
-     * Checks for the property user_id and compares it to the id of this user object
+     * Checks for the property user_id and compares it to the id of this user object.
+     *
      * @param object $object
+     *
      * @return bool
      */
     public function owns($object)

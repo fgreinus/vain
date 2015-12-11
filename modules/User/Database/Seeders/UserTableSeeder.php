@@ -1,7 +1,9 @@
-<?php namespace Modules\User\Database\Seeders;
+<?php
 
-use Illuminate\Database\Seeder;
+namespace Modules\User\Database\Seeders;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\User\Entities\Permission;
 use Modules\User\Entities\Role;
@@ -9,7 +11,6 @@ use Modules\User\Entities\User;
 
 class UserTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -24,38 +25,38 @@ class UserTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $admin = User::create([
-            'id'       => 1,
-            'name'     => 'admin',
-            'email'    => 'admin@vain.app',
-            'password' => bcrypt('123456'),
-            'locale' => 'en',
+            'id'          => 1,
+            'name'        => 'admin',
+            'email'       => 'admin@vain.app',
+            'password'    => bcrypt('123456'),
+            'locale'      => 'en',
             'birthday_at' => '2000-01-01',
         ]);
 
         $fgreinus = User::create([
-            'id'       => 2,
-            'name'     => 'fgreinus',
-            'email'    => 'florian.greinus@gmail.com',
-            'password' => bcrypt('123456'),
-            'locale'   => 'de',
+            'id'          => 2,
+            'name'        => 'fgreinus',
+            'email'       => 'florian.greinus@gmail.com',
+            'password'    => bcrypt('123456'),
+            'locale'      => 'de',
             'birthday_at' => '2000-01-01',
         ]);
 
         $voydz = User::create([
-            'id'       => 3,
-            'name'     => 'voydz',
-            'email'    => 'voydz@hotmail.com',
-            'password' => bcrypt('123456'),
-            'locale'   => 'de',
+            'id'          => 3,
+            'name'        => 'voydz',
+            'email'       => 'voydz@hotmail.com',
+            'password'    => bcrypt('123456'),
+            'locale'      => 'de',
             'birthday_at' => '2000-01-01',
         ]);
 
         $ottowayne = User::create([
-            'id'       => 4,
-            'name'     => 'ottowayne',
-            'email'    => 'mr.ottowayne@gmail.com',
-            'password' => bcrypt('123456'),
-            'locale'   => 'de',
+            'id'          => 4,
+            'name'        => 'ottowayne',
+            'email'       => 'mr.ottowayne@gmail.com',
+            'password'    => bcrypt('123456'),
+            'locale'      => 'de',
             'birthday_at' => '2000-01-01',
         ]);
 

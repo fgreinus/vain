@@ -1,20 +1,22 @@
-<?php namespace Modules\User\Listeners;
+<?php
+
+namespace Modules\User\Listeners;
 
 use Illuminate\View\View;
 use Knp\Menu\MenuItem;
 use Modules\User\Entities\User;
 
-class UserActivityHandler {
-
+class UserActivityHandler
+{
     /**
-     * the menu handler
+     * the menu handler.
      *
      * @var MenuItem
      */
     protected $handler;
 
     /**
-     * the view itself
+     * the view itself.
      *
      * @var View
      */
@@ -45,7 +47,8 @@ class UserActivityHandler {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param \Illuminate\Events\Dispatcher $events
+     *
      * @return array
      */
     public function subscribe($events)

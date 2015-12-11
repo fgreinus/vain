@@ -1,4 +1,6 @@
-<?php namespace Vain\Presenters\Menu;
+<?php
+
+namespace Vain\Presenters\Menu;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Matcher;
@@ -9,9 +11,9 @@ use Vain\Packages\Menu\Matcher\RouteVoter;
 abstract class VainPresenter extends ListRenderer
 {
     /**
-     * inject our config and custom matcher
+     * inject our config and custom matcher.
      */
-    function __construct()
+    public function __construct()
     {
         $matcher = new Matcher();
         $matcher->addVoter(new UriVoter(app('url')->current()));
@@ -24,21 +26,23 @@ abstract class VainPresenter extends ListRenderer
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
-    protected abstract function renderIconElement(ItemInterface $item, array $options = []);
+    abstract protected function renderIconElement(ItemInterface $item, array $options = []);
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
-    protected abstract function renderFoldingElement(ItemInterface $item, array $options = []);
+    abstract protected function renderFoldingElement(ItemInterface $item, array $options = []);
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
      */
     protected function renderRootElement(ItemInterface $item, array $options = [])
     {
@@ -46,7 +50,8 @@ abstract class VainPresenter extends ListRenderer
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     public function render(ItemInterface $item, array $options = [])
@@ -58,23 +63,25 @@ abstract class VainPresenter extends ListRenderer
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderIcon(ItemInterface $item, array $options = [])
     {
         if ($item->getExtra('icon', null) !== null) {
-            return $this->renderIconElement( $item, $options );
+            return $this->renderIconElement($item, $options);
         }
 
         return '';
     }
 
     /**
-     * unless 'raw' extra isn't set to true, we try to translate the label
+     * unless 'raw' extra isn't set to true, we try to translate the label.
      *
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderLabel(ItemInterface $item, array $options)
@@ -92,7 +99,8 @@ abstract class VainPresenter extends ListRenderer
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderFolding(ItemInterface $item, array $options = [])

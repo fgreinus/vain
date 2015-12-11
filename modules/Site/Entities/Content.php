@@ -1,10 +1,12 @@
-<?php namespace Modules\Site\Entities;
+<?php
+
+namespace Modules\Site\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Vain\Packages\Translator\TranslatableContentTrait;
 
-class Content extends Model {
-
+class Content extends Model
+{
     use TranslatableContentTrait;
 
     /**
@@ -19,7 +21,7 @@ class Content extends Model {
      *
      * @var array
      */
-    protected $fillable = [ 'locale', 'title', 'keywords', 'description', 'text' ];
+    protected $fillable = ['locale', 'title', 'keywords', 'description', 'text'];
 
     public function page()
     {

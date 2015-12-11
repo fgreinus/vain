@@ -1,7 +1,8 @@
-<?php namespace Vain\Events;
+<?php
 
-abstract class Event {
+namespace Vain\Events;
 
+abstract class Event
+{
     //
-
 }

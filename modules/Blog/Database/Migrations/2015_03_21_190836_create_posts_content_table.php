@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreatePostsContentTable extends Migration {
-
+class CreatePostsContentTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreatePostsContentTable extends Migration {
      */
     public function up()
     {
-        Schema::create('blog_posts_content', function(Blueprint $table)
-        {
+        Schema::create('blog_posts_content', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('post_id')->unsigned();
@@ -39,5 +38,4 @@ class CreatePostsContentTable extends Migration {
     {
         Schema::drop('blog_posts_content');
     }
-
 }

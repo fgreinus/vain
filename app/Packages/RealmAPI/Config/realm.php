@@ -15,7 +15,7 @@ return [
     'emulators' => [
 
         'trinity' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_TRINITY,
-        'mangos' => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_MANGOS,
+        'mangos'  => \Vain\Packages\RealmAPI\AbstractEmulator::REALM_MANGOS,
 
     ],
 
@@ -36,12 +36,12 @@ return [
 
         'trinity' => [
             'characters' => 'trinity_characters',
-            'dynamics' => 'trinity_dynamics',
+            'dynamics'   => 'trinity_dynamics',
         ],
 
         'mangos' => [
             'characters' => 'mangos_characters',
-            'dynamics' => 'mangos_dynamics',
+            'dynamics'   => 'mangos_dynamics',
         ],
 
     ],
@@ -59,22 +59,21 @@ return [
     'soap' => [
 
         'trinity' => [
-            'host' => env('TRINITY_SOAP_HOST'),
-            'port' => env('TRINITY_SOAP_PORT'),
+            'host'     => env('TRINITY_SOAP_HOST'),
+            'port'     => env('TRINITY_SOAP_PORT'),
             'username' => env('TRINITY_SOAP_USERNAME'),
             'password' => env('TRINITY_SOAP_PASSWORD'),
-            'urn' => 'TC',
+            'urn'      => 'TC',
         ],
 
         'mangos' => [
-            'host' => env('MANGOS_SOAP_HOST'),
-            'port' => env('MANGOS_SOAP_PORT'),
+            'host'     => env('MANGOS_SOAP_HOST'),
+            'port'     => env('MANGOS_SOAP_PORT'),
             'username' => env('MANGOS_SOAP_USERNAME'),
             'password' => env('MANGOS_SOAP_PASSWORD'),
-            'urn' => 'MaNGOS',
+            'urn'      => 'MaNGOS',
         ],
 
     ],
-
 
 ];

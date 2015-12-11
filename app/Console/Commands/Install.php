@@ -40,21 +40,20 @@ class Install extends Command
 
     /**
      * calls a given command with every module
-     * at its first argument
+     * at its first argument.
      *
      * @param $command
      */
     private function callAnyModule($command)
     {
-        $this->getModules()->each(function ($module) use ($command)
-        {
+        $this->getModules()->each(function ($module) use ($command) {
             $this->call($command, [$module->getName()]);
         });
     }
 
     /**
      * returns a collection of all installed modules
-     * ordered by priority
+     * ordered by priority.
      *
      * @return Collection
      */

@@ -1,9 +1,11 @@
-<?php namespace Vain\Providers;
+<?php
+
+namespace Vain\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class ConfigServiceProvider extends ServiceProvider {
-
+class ConfigServiceProvider extends ServiceProvider
+{
     /**
      * Overwrite any vendor / package configuration.
      *
@@ -19,5 +21,4 @@ class ConfigServiceProvider extends ServiceProvider {
             //
         ]);
     }
-
 }

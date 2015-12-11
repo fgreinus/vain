@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder {
-
+class DatabaseSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -20,5 +20,4 @@ class DatabaseSeeder extends Seeder {
         $this->call('Modules\Blog\Database\Seeders\MandatoryDatabaseSeeder');
         $this->call('Modules\Support\Database\Seeders\MandatoryDatabaseSeeder');
     }
-
 }

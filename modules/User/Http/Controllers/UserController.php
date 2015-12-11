@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Controllers;
+<?php
+
+namespace Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -6,11 +8,11 @@ use Illuminate\Session\Store;
 use Modules\User\Entities\User;
 use Modules\User\Services\Updater;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     protected $updater;
 
-    function __construct(Updater $updater)
+    public function __construct(Updater $updater)
     {
         $this->updater = $updater;
     }
@@ -30,9 +32,9 @@ class UserController extends Controller {
         $user = $request->user();
 
         $genders = [
-            null => trans('user::profile.gender.none'),
-            'male' => trans('user::profile.gender.male'),
-            'female' => trans('user::profile.gender.female')
+            null     => trans('user::profile.gender.none'),
+            'male'   => trans('user::profile.gender.male'),
+            'female' => trans('user::profile.gender.female'),
         ];
 
         $locales = config('app.locales');
@@ -45,11 +47,10 @@ class UserController extends Controller {
     {
         $validator = $this->updater->validator($request->user(), $request->all());
 
-        if ($validator->fails())
-        {
-            if ($request->ajax())
-            {
+        if ($validator->fails()) {
+            if ($request->ajax()) {
                 $session->flash('errors', $validator->getMessageBag());
+
                 return response('', 500);
             }
 
@@ -64,6 +65,6 @@ class UserController extends Controller {
             return response('', 200);
         }
 
-        return redirect()->route('user.profile', [ 'id' => $request->user()->id ]);
+        return redirect()->route('user.profile', ['id' => $request->user()->id]);
     }
 }

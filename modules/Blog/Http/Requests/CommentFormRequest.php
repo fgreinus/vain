@@ -1,20 +1,21 @@
-<?php namespace Modules\Blog\Http\Requests;
+<?php
+
+namespace Modules\Blog\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Vain\Http\Requests\Request;
 
 class CommentFormRequest extends Request
 {
-
     /**
-     * validation that has to pass
+     * validation that has to pass.
      *
      * @return array
      */
     public function rules()
     {
         return [
-            'id' => 'exists:comments',
+            'id'   => 'exists:comments',
             'text' => 'required|min:3',
         ];
     }

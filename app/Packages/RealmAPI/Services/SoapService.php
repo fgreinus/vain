@@ -1,4 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI\Services;
+<?php
+
+namespace Vain\Packages\RealmAPI\Services;
 
 use SoapClient;
 use SoapFault;
@@ -34,51 +36,50 @@ class SoapService
     /**
      * @param int $timeout
      */
-    public function setTimeout( $timeout )
+    public function setTimeout($timeout)
     {
         $this->timeout = $timeout;
     }
 
     /**
-     * dismiss soap connection
+     * dismiss soap connection.
      */
-    function __destruct()
+    public function __destruct()
     {
         $this->client = null;
     }
 
     /**
      * @param array $config
+     *
      * @return SoapService
      */
-    public function configure( $config )
+    public function configure($config)
     {
         $this->config = [
-            "location" => sprintf("http://%s:%s/", $config['host'], $config['port']),
-            "uri" => "urn:".$config['urn'],
-            "style" => SOAP_RPC,
-            "login" => $config['username'],
-            "password" => $config['password'],
-            "connection_timeout" => $this->timeout,
+            'location'           => sprintf('http://%s:%s/', $config['host'], $config['port']),
+            'uri'                => 'urn:'.$config['urn'],
+            'style'              => SOAP_RPC,
+            'login'              => $config['username'],
+            'password'           => $config['password'],
+            'connection_timeout' => $this->timeout,
         ];
 
         return $this;
     }
 
     /**
-     * opens connection to soap if not allready done
+     * opens connection to soap if not allready done.
      *
      * @return SoapClient
      */
     public function client()
     {
-        if ($this->config === null)
-        {
+        if ($this->config === null) {
             throw new \InvalidArgumentException('was not configured');
         }
 
-        if ($this->client === null)
-        {
+        if ($this->client === null) {
             $this->client = new SoapClient(null, $this->config);
         }
 
@@ -86,33 +87,34 @@ class SoapService
     }
 
     /**
-     * Will send a SOAP command to the realm. Will return false if command fails
+     * Will send a SOAP command to the realm. Will return false if command fails.
+     *
      * @param $command
-     * @return String|null|boolean
+     *
+     * @return string|null|bool
      */
     public function send($command)
     {
         // ToDo: logging on success and fail
-        try
-        {
+        try {
             // this may return null although everything worked out fine (e.g. for send mail)
-            $response = $this->client()->executeCommand(new SoapParam($command, "command"));
+            $response = $this->client()->executeCommand(new SoapParam($command, 'command'));
 
             // Trinity response for missing command - same for mangos?
-            if (strpos($response, "Es gibt keinen solchen Unterbefehl.") !== false)
-                throw new \InvalidArgumentException("SOAP Befehl existiert nicht");
+            if (strpos($response, 'Es gibt keinen solchen Unterbefehl.') !== false) {
+                throw new \InvalidArgumentException('SOAP Befehl existiert nicht');
+            }
 
             return $response;
-        }
-        catch (SoapFault $e)
-        {
+        } catch (SoapFault $e) {
             // possible exceptions:
             // Could not connect to host
             // HTTP Error: 403 Forbidden
             // Spieler nicht gefunden! (Trinity)
             // ...
-            if (config('app.debug'))
+            if (config('app.debug')) {
                 throw $e;
+            }
 
             return false;
         }

@@ -1,9 +1,11 @@
-<?php namespace Modules\Site\Providers;
+<?php
+
+namespace Modules\Site\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class SiteServiceProvider extends ServiceProvider {
-
+class SiteServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -19,10 +21,10 @@ class SiteServiceProvider extends ServiceProvider {
     public function boot()
     {
         $langPath = __DIR__.'/../Resources/lang';
-        $this->loadTranslationsFrom( $langPath, 'site' );
+        $this->loadTranslationsFrom($langPath, 'site');
 
         $viewPath = __DIR__.'/../Resources/views';
-        $this->loadViewsFrom( $viewPath, 'site' );
+        $this->loadViewsFrom($viewPath, 'site');
     }
 
     /**

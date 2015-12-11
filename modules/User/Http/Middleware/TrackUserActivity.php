@@ -1,7 +1,8 @@
-<?php namespace Modules\User\Http\Middleware;
+<?php
+
+namespace Modules\User\Http\Middleware;
 
 use Closure;
-use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Guard;
 
 class TrackUserActivity
@@ -16,7 +17,7 @@ class TrackUserActivity
     /**
      * Create a new filter instance.
      *
-     * @param  Guard $auth
+     * @param Guard $auth
      */
     public function __construct(Guard $auth)
     {
@@ -26,14 +27,14 @@ class TrackUserActivity
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param callable|Closure $next
+     * @param \Illuminate\Http\Request $request
+     * @param callable|Closure         $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check())
-        {
+        if ($this->auth->check()) {
             /** @var \Modules\User\Entities\User $user */
             $user = $this->auth->user();
 

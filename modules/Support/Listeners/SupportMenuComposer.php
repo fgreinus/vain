@@ -1,4 +1,6 @@
-<?php namespace Modules\Support\Listeners;
+<?php
+
+namespace Modules\Support\Listeners;
 
 use Illuminate\Support\Facades\Auth;
 use Modules\Support\Entities\Category;
@@ -12,8 +14,7 @@ class SupportMenuComposer
      */
     public function composeFrontendMenu(FrontendMenuCreated $event)
     {
-        if (Auth::check() && policy(Category::class)->index(Auth::user()))
-        {
+        if (Auth::check() && policy(Category::class)->index(Auth::user())) {
             $event->handler->addChild('support::support.index')
                 ->setExtra('routes', ['support.category.show', 'support.category.index'])
                 ->setUri(route('support.category.index'))
@@ -26,7 +27,6 @@ class SupportMenuComposer
      */
     public function composeBackendMenu(BackendMenuCreated $event)
     {
-
     }
 
     /**

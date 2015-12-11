@@ -28,21 +28,21 @@ return [
     */
 
     'facebook' => [
-        'client_id' => '',
+        'client_id'     => '',
         'client_secret' => '',
-        'redirect' => config('app.url') .'/oauth/handle?provider=facebook',
+        'redirect'      => config('app.url').'/oauth/handle?provider=facebook',
     ],
 
     'twitter' => [
-        'client_id' => '',
+        'client_id'     => '',
         'client_secret' => '',
-        'redirect' => config('app.url') .'/oauth/handle?provider=twitter',
+        'redirect'      => config('app.url').'/oauth/handle?provider=twitter',
     ],
 
     'google' => [
-        'client_id' => '537029912451-fke2uv0cg3751mhahlrq01bb0079j1pi.apps.googleusercontent.com',
+        'client_id'     => '537029912451-fke2uv0cg3751mhahlrq01bb0079j1pi.apps.googleusercontent.com',
         'client_secret' => 'FvLnrqPM7WzpawKBkt0EPFgV',
-        'redirect' => config('app.url') .'/oauth/handle?provider=google',
+        'redirect'      => config('app.url').'/oauth/handle?provider=google',
     ],
 
 ];

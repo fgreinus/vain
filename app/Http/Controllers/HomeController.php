@@ -1,7 +1,9 @@
-<?php namespace Vain\Http\Controllers;
+<?php
 
-class HomeController extends Controller {
+namespace Vain\Http\Controllers;
 
+class HomeController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Home Controller
@@ -18,9 +20,9 @@ class HomeController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('auth', [ 'only' => 'home' ] );
+        $this->middleware('auth', ['only' => 'home']);
 
-        $this->middleware('guest', [ 'only' => 'index' ]);
+        $this->middleware('guest', ['only' => 'index']);
     }
 
     /**
@@ -42,5 +44,4 @@ class HomeController extends Controller {
     {
         return view('home');
     }
-
 }

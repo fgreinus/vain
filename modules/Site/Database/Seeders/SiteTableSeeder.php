@@ -1,13 +1,15 @@
-<?php namespace Modules\Site\Database\Seeders;
+<?php
 
-use Illuminate\Database\Seeder;
+namespace Modules\Site\Database\Seeders;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Modules\Site\Entities\Content;
 use Modules\Site\Entities\Page;
 
-class SiteTableSeeder extends Seeder {
-
+class SiteTableSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -18,49 +20,48 @@ class SiteTableSeeder extends Seeder {
         Model::unguard();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        
+
         $this->call('Modules\Site\Database\Seeders\PagesTableSeeder');
         $this->call('Modules\Site\Database\Seeders\ContentsTableSeeder');
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
-
 }
 
-class PagesTableSeeder extends Seeder {
-
+class PagesTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('site_pages')->delete();
 
         Page::create([
-            'id' => 1,
+            'id'      => 1,
             'user_id' => 1,
-            'slug' => 'setup-the-development-environment',
+            'slug'    => 'setup-the-development-environment',
         ]);
 
         Page::create([
-            'id' => 2,
+            'id'      => 2,
             'user_id' => 1,
-            'slug' => 'project-setup-and-maintenance',
+            'slug'    => 'project-setup-and-maintenance',
         ]);
     }
 }
 
-class ContentsTableSeeder extends Seeder {
-
+class ContentsTableSeeder extends Seeder
+{
     public function run()
     {
         DB::table('site_pages_content')->delete();
 
         Content::create([
-            'id' => 1,
-            'locale' => 'en',
-            'page_id' => 1,
-            'title' => 'Setup the Development Environment',
-            'keywords' => 'setup, development, environment',
+            'id'          => 1,
+            'locale'      => 'en',
+            'page_id'     => 1,
+            'title'       => 'Setup the Development Environment',
+            'keywords'    => 'setup, development, environment',
             'description' => 'A simple explanation of how to setup your dev environment.',
-            'text' => <<<EOF
+            'text'        => <<<EOF
 <div class="markdown-body">
     <p><em>Already got the Virtual Machine up and running? Follow the <a href="project-setup-and-maintenance">Project Setup and Maintenance</a> guide for required first-start instructions and maintenance operations.</em></p>
     <h2>
@@ -150,13 +151,13 @@ EOF
         ]);
 
         Content::create([
-            'id' => 2,
-            'locale' => 'en',
-            'page_id' => 2,
-            'title' => 'Project Setup and Maintenance',
-            'keywords' => 'project, setup, maintenance',
+            'id'          => 2,
+            'locale'      => 'en',
+            'page_id'     => 2,
+            'title'       => 'Project Setup and Maintenance',
+            'keywords'    => 'project, setup, maintenance',
             'description' => 'Explanation how to configure the project.',
-            'text' => <<<EOF
+            'text'        => <<<EOF
 <div class="markdown-body">
     <p><em>You already have Vain ready for development? Start contributing! Get a feeling for the platform by reading the <a href="deep-dive-development">Deep Dive Development</a> guide.</em></p>
     <h2>

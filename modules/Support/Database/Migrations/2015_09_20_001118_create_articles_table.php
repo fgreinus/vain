@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateArticlesTable extends Migration {
-
+class CreateArticlesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreateArticlesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('support_articles', function (Blueprint $table)
-        {
+        Schema::create('support_articles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug');
             $table->integer('user_id')->unsigned();
@@ -40,5 +39,4 @@ class CreateArticlesTable extends Migration {
     {
         Schema::drop('support_articles');
     }
-
 }

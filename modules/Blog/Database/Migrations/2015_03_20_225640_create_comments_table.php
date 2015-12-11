@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateCommentsTable extends Migration {
-
+class CreateCommentsTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreateCommentsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('blog_comments', function(Blueprint $table)
-        {
+        Schema::create('blog_comments', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('user_id')->unsigned();
@@ -38,5 +37,4 @@ class CreateCommentsTable extends Migration {
     {
         Schema::drop('blog_comments');
     }
-
 }

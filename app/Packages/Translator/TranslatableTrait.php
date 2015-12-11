@@ -1,16 +1,19 @@
-<?php namespace Vain\Packages\Translator;
+<?php
 
-trait TranslatableTrait {
+namespace Vain\Packages\Translator;
 
+trait TranslatableTrait
+{
     /**
      * @var \Illuminate\Database\Eloquent\Model[]
      */
     private $_content = [];
 
     /**
-     * accessor for content current user language
+     * accessor for content current user language.
      *
      * @param $value
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function getContentAttribute($value)
@@ -19,21 +22,20 @@ trait TranslatableTrait {
     }
 
     /**
-     * returns the localized content
+     * returns the localized content.
      *
      * @param null $locale
      * @param bool $fallback
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function content($locale = null, $fallback = true)
     {
-        if ($locale === null)
-        {
+        if ($locale === null) {
             $locale = app()->getLocale();
         }
 
-        if ($this->has($locale))
-        {
+        if ($this->has($locale)) {
             return $this->get($locale);
         }
 
@@ -41,8 +43,7 @@ trait TranslatableTrait {
             ->where('locale', $locale)
             ->first();
 
-        if ($fallback && $content === null)
-        {
+        if ($fallback && $content === null) {
             $content = $this->contents()
                 ->first();
         }
@@ -53,9 +54,9 @@ trait TranslatableTrait {
     }
 
     /**
-     * store internal runtime cache
+     * store internal runtime cache.
      *
-     * @param string $locale
+     * @param string                              $locale
      * @param \Illuminate\Database\Eloquent\Model $content
      */
     private function store($locale, $content)
@@ -64,9 +65,10 @@ trait TranslatableTrait {
     }
 
     /**
-     * get internal runtime cache
+     * get internal runtime cache.
      *
      * @param $locale
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     private function get($locale)
@@ -75,9 +77,10 @@ trait TranslatableTrait {
     }
 
     /**
-     * exists in internal runtime cache
+     * exists in internal runtime cache.
      *
      * @param $locale
+     *
      * @return bool
      */
     private function has($locale)

@@ -1,4 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI\Models;
+<?php
+
+namespace Vain\Packages\RealmAPI\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,5 +20,4 @@ class Account extends Model
      * @var string
      */
     protected $connection = 'logon';
-
 }

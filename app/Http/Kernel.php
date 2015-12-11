@@ -1,9 +1,11 @@
-<?php namespace Vain\Http;
+<?php
+
+namespace Vain\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel {
-
+class Kernel extends HttpKernel
+{
     /**
      * The application's global HTTP middleware stack.
      *
@@ -27,12 +29,11 @@ class Kernel extends HttpKernel {
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => 'Modules\User\Http\Middleware\Authenticate',
+        'auth'       => 'Modules\User\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\User\Middleware\AuthenticateWithBasicAuth',
-        'guest' => 'Modules\User\Http\Middleware\RedirectIfAuthenticated',
-        'admin' => 'Modules\User\Http\Middleware\VerfiyBackendPermission',
-        'role' => 'Modules\User\Http\Middleware\EnsureRole',
+        'guest'      => 'Modules\User\Http\Middleware\RedirectIfAuthenticated',
+        'admin'      => 'Modules\User\Http\Middleware\VerfiyBackendPermission',
+        'role'       => 'Modules\User\Http\Middleware\EnsureRole',
         'permission' => 'Modules\User\Http\Middleware\EnsurePermission',
     ];
-
 }

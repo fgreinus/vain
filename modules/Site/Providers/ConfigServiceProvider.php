@@ -1,11 +1,12 @@
-<?php namespace Modules\Site\Providers;
+<?php
 
-use Illuminate\Foundation\AliasLoader;
+namespace Modules\Site\Providers;
+
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
-class ConfigServiceProvider extends ServiceProvider {
-
+class ConfigServiceProvider extends ServiceProvider
+{
     /**
      * Overwrite any vendor / package configuration.
      *

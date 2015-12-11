@@ -1,10 +1,12 @@
-<?php namespace Modules\Support\Entities;
+<?php
+
+namespace Modules\Support\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Vain\Packages\Translator\TranslatableContentTrait;
 
-class CategoryContent extends Model {
-
+class CategoryContent extends Model
+{
     use TranslatableContentTrait;
 
     protected $table = 'support_categories_content';

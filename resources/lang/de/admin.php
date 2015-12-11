@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'menu' => 'HAUPTMENÜ',
+    'menu'   => 'HAUPTMENÜ',
     'search' => 'Suche...',
 ];

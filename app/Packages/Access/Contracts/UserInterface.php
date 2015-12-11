@@ -19,7 +19,6 @@ interface UserInterface extends AuthorizableContract
      * @param string|array $name Role name or array of role names.
      *
      * @return bool
-     *
      */
     public function hasRole($name);
 
@@ -47,14 +46,14 @@ interface UserInterface extends AuthorizableContract
     public function detachRole($role);
 
     /**
-     * Attach multiple roles to a user
+     * Attach multiple roles to a user.
      *
      * @param mixed $roles
      */
     public function attachRoles($roles);
 
     /**
-     * Detach multiple roles from a user
+     * Detach multiple roles from a user.
      *
      * @param mixed $roles
      */

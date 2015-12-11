@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Controllers\Admin;
+<?php
+
+namespace Modules\User\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Modules\User\Entities\Permission;
@@ -6,9 +8,9 @@ use Modules\User\Entities\Role;
 use Modules\User\Http\Requests\RoleFormRequest;
 use Vain\Http\Controllers\Controller;
 
-class RoleController extends Controller {
-
-    function __construct()
+class RoleController extends Controller
+{
+    public function __construct()
     {
         $this->middleware('permission:user.role.show', ['only' => ['index', 'show']]);
         $this->middleware('permission:user.role.create', ['only' => ['create', 'store']]);
@@ -46,7 +48,7 @@ class RoleController extends Controller {
 
     public function edit($id)
     {
-        /** @var User $user */
+        /* @var User $user */
         $role = Role::find($id);
 
         $permissions = Permission::lists('display_name', 'id')->all();
@@ -77,11 +79,12 @@ class RoleController extends Controller {
 
         Role::find($id)->delete();
 
-       return $this->createDefaultResponse($request);
+        return $this->createDefaultResponse($request);
     }
 
     /**
      * @param $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     protected function createDefaultResponse($request)

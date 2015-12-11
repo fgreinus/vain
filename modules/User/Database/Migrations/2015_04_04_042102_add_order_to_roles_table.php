@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddOrderToRolesTable extends Migration {
-
+class AddOrderToRolesTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class AddOrderToRolesTable extends Migration {
      */
     public function up()
     {
-        Schema::table('roles', function(Blueprint $table)
-        {
+        Schema::table('roles', function (Blueprint $table) {
             $table->tinyInteger('order')->unsigned();
         });
     }
@@ -25,10 +24,8 @@ class AddOrderToRolesTable extends Migration {
      */
     public function down()
     {
-        Schema::table('roles', function(Blueprint $table)
-        {
+        Schema::table('roles', function (Blueprint $table) {
             $table->dropColumn('order');
         });
     }
-
 }

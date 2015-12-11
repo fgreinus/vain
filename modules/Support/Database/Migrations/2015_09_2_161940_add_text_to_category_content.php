@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddTextToCategoryContent extends Migration {
-
+class AddTextToCategoryContent extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,7 +12,7 @@ class AddTextToCategoryContent extends Migration {
      */
     public function up()
     {
-        Schema::table('support_categories_content', function(Blueprint $table) {
+        Schema::table('support_categories_content', function (Blueprint $table) {
             $table->text('text');
         });
     }
@@ -24,9 +24,8 @@ class AddTextToCategoryContent extends Migration {
      */
     public function down()
     {
-        Schema::table('support_categories_content', function(Blueprint $table) {
+        Schema::table('support_categories_content', function (Blueprint $table) {
             $table->dropColumn('text');
         });
     }
-
 }

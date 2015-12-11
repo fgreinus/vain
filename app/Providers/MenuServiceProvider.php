@@ -1,4 +1,6 @@
-<?php namespace Vain\Providers;
+<?php
+
+namespace Vain\Providers;
 
 use Dowilcox\KnpMenu\Facades\Menu;
 use Illuminate\Support\Facades\Event;
@@ -26,15 +28,15 @@ class MenuServiceProvider extends ServiceProvider
     }
 
     /**
-     * build frontend menu and attach it to view
+     * build frontend menu and attach it to view.
      */
     private function registerFrontendMenu()
     {
-        $this->app->singleton('menu.frontend', function() {
+        $this->app->singleton('menu.frontend', function () {
             return Menu::create('frontend');
         });
 
-        View::composer('app', function($view) {
+        View::composer('app', function ($view) {
             $handler = app('menu.frontend');
             $view->with('menu', $handler);
 
@@ -43,8 +45,7 @@ class MenuServiceProvider extends ServiceProvider
                 ->setUri(route('index.home'))
                 ->setExtra('icon', 'home');
 
-            if (Gate::allows('app.admin.show'))
-            {
+            if (Gate::allows('app.admin.show')) {
                 $handler->addChild('Admin Panel')
                     ->setUri(route('user.admin.users.index'))
                     ->setExtra('icon', 'tachometer');
@@ -57,6 +58,7 @@ class MenuServiceProvider extends ServiceProvider
     /*
  * build backend menu and attach it to view
  */
+
     private function registerBackendMenu()
     {
         $this->app->singleton('menu.backend', function () {
