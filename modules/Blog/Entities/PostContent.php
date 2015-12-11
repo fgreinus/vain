@@ -1,10 +1,12 @@
-<?php namespace Modules\Blog\Entities;
-   
+<?php
+
+namespace Modules\Blog\Entities;
+
 use Illuminate\Database\Eloquent\Model;
 use Vain\Packages\Translator\TranslatableContentTrait;
 
-class PostContent extends Model {
-
+class PostContent extends Model
+{
     use TranslatableContentTrait;
 
     /**
@@ -28,26 +30,30 @@ class PostContent extends Model {
     }
 
     /**
-     * accessor for intro text of the post
+     * accessor for intro text of the post.
      *
      * @param $value
+     *
      * @return string
      */
     public function getTeaserAttribute($value)
     {
         $parts = explode('<hr />', $this->text, 1);
+
         return reset($parts);
     }
 
     /**
-     * accessor for main section text of the post (without the teaser)
+     * accessor for main section text of the post (without the teaser).
      *
      * @param $value
+     *
      * @return string
      */
     public function getBodyAttribute($value)
     {
         $parts = explode('<hr />', $this->text, 1);
+
         return count($parts) > 1 ? end($parts) : '';
     }
 }

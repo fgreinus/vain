@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Blog\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Modules\Blog\Entities\Category;
@@ -8,7 +10,6 @@ use Vain\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
         $this->authorize('index', Category::class);
@@ -35,8 +36,7 @@ class CategoryController extends Controller
         /** @var Category $category */
         $category = Category::create($request->all());
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = (new CategoryContent())
                 ->fillTranslated($locale, $request->all());
 
@@ -67,8 +67,7 @@ class CategoryController extends Controller
         $category->fill($request->all());
         $category->save();
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = $category->contents()
                 ->localeOrNew($locale)
                 ->fillTranslated($locale, $request->all());
@@ -92,6 +91,7 @@ class CategoryController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     protected function createDefaultResponse($request)

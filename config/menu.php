@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     /*
@@ -19,7 +20,7 @@ return [
         'lastClass'         => null,
         'compressed'        => false,
         'allow_safe_labels' => false,
-        'clear_matcher'     => true
-    ]
+        'clear_matcher'     => true,
+    ],
 
 ];

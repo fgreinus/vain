@@ -1,4 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI;
+<?php
+
+namespace Vain\Packages\RealmAPI;
 
 use Illuminate\Support\Facades\Config;
 
@@ -6,6 +8,7 @@ trait Configurator
 {
     /**
      * @param $realm
+     *
      * @return int
      */
     protected function getTypeConfig($realm)
@@ -15,6 +18,7 @@ trait Configurator
 
     /**
      * @param $realm
+     *
      * @return array
      */
     protected function getDatabaseConfig($realm)
@@ -24,8 +28,10 @@ trait Configurator
 
     /**
      * @param $realm
-     * @return mixed
+     *
      * @throws InvalidArgumentException
+     *
+     * @return mixed
      */
     protected function getSoapConfig($realm)
     {
@@ -35,16 +41,17 @@ trait Configurator
     /**
      * @param $realm
      * @param $key
-     * @return mixed
+     *
      * @throws InvalidArgumentException
+     *
+     * @return mixed
      */
     private function getConfigOrFail($realm, $key)
     {
         $config = Config::get($key);
 
-        if (!array_key_exists($realm, $config))
-        {
-            throw new InvalidArgumentException('Cannot find realm \''. $realm . '\' in realm config, make sure it is setup correctly');
+        if (!array_key_exists($realm, $config)) {
+            throw new InvalidArgumentException('Cannot find realm \''.$realm.'\' in realm config, make sure it is setup correctly');
         }
 
         return $config[ $realm ];

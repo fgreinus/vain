@@ -1,8 +1,9 @@
-<?php namespace Modules\User\Http\Controllers\Admin;
+<?php
+
+namespace Modules\User\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
-use Illuminate\Support\Facades\Session;
 use InvalidArgumentException;
 use Modules\User\Entities\Role;
 use Modules\User\Entities\User;
@@ -10,14 +11,14 @@ use Modules\User\Services\Registrar;
 use Modules\User\Services\Updater;
 use Vain\Http\Controllers\Controller;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     /**
      * @var Request
      */
     protected $request;
 
-    function __construct(Request $request)
+    public function __construct(Request $request)
     {
         $this->request = $request;
 
@@ -40,9 +41,9 @@ class UserController extends Controller {
         $roles = Role::lists('display_name', 'id')->all();
 
         $genders = [
-            null => trans('user::profile.gender.none'),
-            'male' => trans('user::profile.gender.male'),
-            'female' => trans('user::profile.gender.female')
+            null     => trans('user::profile.gender.none'),
+            'male'   => trans('user::profile.gender.male'),
+            'female' => trans('user::profile.gender.female'),
         ];
 
         $locales = config('app.locales');
@@ -55,11 +56,10 @@ class UserController extends Controller {
     {
         $validator = $registrar->validator($this->request->all());
 
-        if ($validator->fails())
-        {
-            if ($this->request->ajax())
-            {
+        if ($validator->fails()) {
+            if ($this->request->ajax()) {
                 $session->flash('errors', $validator->getMessageBag());
+
                 return response('', 500);
             }
 
@@ -82,9 +82,9 @@ class UserController extends Controller {
         $roles = Role::lists('display_name', 'id')->all();
 
         $genders = [
-            null => trans('user::profile.gender.none'),
-            'male' => trans('user::profile.gender.male'),
-            'female' => trans('user::profile.gender.female')
+            null     => trans('user::profile.gender.none'),
+            'male'   => trans('user::profile.gender.male'),
+            'female' => trans('user::profile.gender.female'),
         ];
 
         $locales = config('app.locales');
@@ -100,11 +100,10 @@ class UserController extends Controller {
 
         $validator = $updater->validator($user, $this->request->all());
 
-        if ($validator->fails())
-        {
-            if ($this->request->ajax())
-            {
+        if ($validator->fails()) {
+            if ($this->request->ajax()) {
                 $session->flash('errors', $validator->getMessageBag());
+
                 return response('', 500);
             }
 
@@ -122,12 +121,11 @@ class UserController extends Controller {
 
     public function destroy($id)
     {
-        if ($id == $this->request->user()->id)
-        {
-            throw new InvalidArgumentException;
+        if ($id == $this->request->user()->id) {
+            throw new InvalidArgumentException();
         }
 
-        /** @var User $user */
+        /* @var User $user */
         User::find($id)->delete();
 
         return $this->createDefaultResponse();

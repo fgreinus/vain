@@ -1,11 +1,13 @@
-<?php namespace Modules\Blog\Entities;
-   
+<?php
+
+namespace Modules\Blog\Entities;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;
 
-class Comment extends Model {
-
+class Comment extends Model
+{
     use SoftDeletes, LocalizedEloquentTrait;
 
     /**

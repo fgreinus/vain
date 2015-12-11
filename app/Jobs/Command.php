@@ -1,7 +1,8 @@
-<?php namespace Vain\Jobs;
+<?php
 
-abstract class Command {
+namespace Vain\Jobs;
 
+abstract class Command
+{
     //
-
 }

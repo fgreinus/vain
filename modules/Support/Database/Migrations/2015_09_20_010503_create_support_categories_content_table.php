@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateSupportCategoriesContentTable extends Migration {
-
+class CreateSupportCategoriesContentTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreateSupportCategoriesContentTable extends Migration {
      */
     public function up()
     {
-        Schema::create('support_categories_content', function(Blueprint $table)
-        {
+        Schema::create('support_categories_content', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('category_id')->unsigned();
@@ -36,5 +35,4 @@ class CreateSupportCategoriesContentTable extends Migration {
     {
         Schema::drop('support_categories_content');
     }
-
 }

@@ -1,11 +1,13 @@
-<?php namespace Vain\Packages\Menu\Matcher;
+<?php
+
+namespace Vain\Packages\Menu\Matcher;
 
 use Illuminate\Http\Request;
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
 
 /**
- * Voter based on the route
+ * Voter based on the route.
  */
 class RouteVoter implements VoterInterface
 {
@@ -27,11 +29,11 @@ class RouteVoter implements VoterInterface
     public function matchItem(ItemInterface $item)
     {
         if (null === $this->request) {
-            return null;
+            return;
         }
 
         if (null === $route = $this->request->route()) {
-            return null;
+            return;
         }
 
         $routes = $item->getExtra('routes', []);
@@ -48,6 +50,6 @@ class RouteVoter implements VoterInterface
             }
         }
 
-        return null;
+        return;
     }
 }

@@ -1,20 +1,22 @@
-<?php namespace Modules\User\Http\Requests;
+<?php
 
+namespace Modules\User\Http\Requests;
+
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Contracts\Validation\Validator;
 
 class RoleFormRequest extends FormRequest
 {
     /**
-     *  validation that has to pass
+     *  validation that has to pass.
      *
      * @return array
      */
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name'         => 'required',
             'display_name' => 'required',
 //            'description' => '',
         ];
@@ -37,8 +39,7 @@ class RoleFormRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {
-        if ($this->ajax())
-        {
+        if ($this->ajax()) {
             $this->session()->flashInput($this->all());
             $this->session()->flash('errors', $validator->getMessageBag());
         }

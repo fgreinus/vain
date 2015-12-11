@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'menu' => 'MAIN NAVIGATION',
+    'menu'   => 'MAIN NAVIGATION',
     'search' => 'Search...',
 ];

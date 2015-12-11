@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Blog\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Modules\Blog\Entities\Category;
@@ -9,7 +11,6 @@ use Vain\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
-
     public function index()
     {
         $this->authorize('index', Post::class);
@@ -39,8 +40,7 @@ class PostController extends Controller
         $post->user()->associate($request->user());
         $post->save();
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = (new PostContent())
                 ->fillTranslated($locale, $request->all());
 
@@ -73,8 +73,7 @@ class PostController extends Controller
         $post->fill($request->all());
         $post->save();
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = $post->contents()
                 ->localeOrNew($locale)
                 ->fillTranslated($locale, $request->all());
@@ -99,6 +98,7 @@ class PostController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     protected function createDefaultResponse($request)

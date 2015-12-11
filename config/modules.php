@@ -8,22 +8,22 @@ return [
         'enabled'   => false,
         'path'      => base_path().'/vendor/pingpong/modules/src/Pingpong/Modules/Commands/stubs',
         'files'     => [
-            'start'         => 'start.php',
-            'routes'        => 'Http/routes.php',
-            'json'          => 'module.json',
-            'views/index'   => 'Resources/views/index.blade.php',
-            'views/master'  => 'Resources/views/layouts/master.blade.php',
+            'start'           => 'start.php',
+            'routes'          => 'Http/routes.php',
+            'json'            => 'module.json',
+            'views/index'     => 'Resources/views/index.blade.php',
+            'views/master'    => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
-            'composer'      => 'composer.json',
+            'composer'        => 'composer.json',
         ],
         'replacements' => [
-            'start'         => ['LOWER_NAME'],
-            'routes'        => ['LOWER_NAME', 'STUDLY_NAME'],
-            'json'          => ['LOWER_NAME', 'STUDLY_NAME'],
-            'views/index'   => ['LOWER_NAME'],
-            'views/master'  => ['STUDLY_NAME'],
+            'start'           => ['LOWER_NAME'],
+            'routes'          => ['LOWER_NAME', 'STUDLY_NAME'],
+            'json'            => ['LOWER_NAME', 'STUDLY_NAME'],
+            'views/index'     => ['LOWER_NAME'],
+            'views/master'    => ['STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME'],
-            'composer'      => ['LOWER_NAME', 'STUDLY_NAME', 'VENDOR', 'AUTHOR_NAME', 'AUTHOR_EMAIL'],
+            'composer'        => ['LOWER_NAME', 'STUDLY_NAME', 'VENDOR', 'AUTHOR_NAME', 'AUTHOR_EMAIL'],
         ],
     ],
 
@@ -74,21 +74,21 @@ return [
         */
 
         'generator' => [
-            'assets' => 'Resources/assets',
-            'config' => 'Config',
-            'command' => 'Console',
-            'migration' => 'Database/Migrations',
-            'model' => 'Entities',
+            'assets'     => 'Resources/assets',
+            'config'     => 'Config',
+            'command'    => 'Console',
+            'migration'  => 'Database/Migrations',
+            'model'      => 'Entities',
             'repository' => 'Repositories',
-            'seeder' => 'Database/Seeders',
+            'seeder'     => 'Database/Seeders',
             'controller' => 'Http/Controllers',
-            'filter' => 'Http/Middleware',
-            'request' => 'Http/Requests',
-            'provider' => 'Providers',
-            'lang' => 'Resources/lang',
-            'views' => 'Resources/views',
-            'test' => 'Tests',
-        ]
+            'filter'     => 'Http/Middleware',
+            'request'    => 'Http/Requests',
+            'provider'   => 'Providers',
+            'lang'       => 'Resources/lang',
+            'views'      => 'Resources/views',
+            'test'       => 'Tests',
+        ],
     ],
 
     /*
@@ -103,8 +103,8 @@ return [
 
     'scan' => [
         'enabled' => false,
-        'paths' => [
-            base_path('vendor/*/*')
+        'paths'   => [
+            base_path('vendor/*/*'),
         ],
     ],
 
@@ -121,9 +121,9 @@ return [
     'composer' => [
         'vendor' => 'pingpong-modules',
         'author' => [
-            "name" => 'Pingpong Labs',
-            'email' => 'pingpong.labs@gmail.com'
-        ]
+            'name'  => 'Pingpong Labs',
+            'email' => 'pingpong.labs@gmail.com',
+        ],
     ],
 
     /*
@@ -136,9 +136,9 @@ return [
     */
 
     'cache' => [
-        'enabled' => false,
-        'key' => 'pingpong-modules',
-        'lifetime' => 60
-    ]
+        'enabled'  => false,
+        'key'      => 'pingpong-modules',
+        'lifetime' => 60,
+    ],
 
 ];

@@ -1,12 +1,15 @@
-<?php namespace Modules\Site\Policies;
+<?php
+
+namespace Modules\Site\Policies;
 
 use Modules\Site\Entities\Page;
 use Vain\Policies\Policy;
 
-class PagePolicy extends Policy {
-
+class PagePolicy extends Policy
+{
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function index($user)
@@ -16,6 +19,7 @@ class PagePolicy extends Policy {
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function show($user)
@@ -25,6 +29,7 @@ class PagePolicy extends Policy {
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function create($user)
@@ -35,6 +40,7 @@ class PagePolicy extends Policy {
     /**
      * @param User $user
      * @param Page $page
+     *
      * @return bool
      */
     public function edit($user, $page)
@@ -45,6 +51,7 @@ class PagePolicy extends Policy {
     /**
      * @param User $user
      * @param Page $page
+     *
      * @return bool
      */
     public function destroy($user, $page)

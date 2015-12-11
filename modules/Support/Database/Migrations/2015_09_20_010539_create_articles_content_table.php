@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateArticlesContentTable extends Migration {
-
+class CreateArticlesContentTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -12,8 +12,7 @@ class CreateArticlesContentTable extends Migration {
      */
     public function up()
     {
-        Schema::create('support_articles_content', function(Blueprint $table)
-        {
+        Schema::create('support_articles_content', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->string('locale', 2);
@@ -38,5 +37,4 @@ class CreateArticlesContentTable extends Migration {
     {
         Schema::drop('support_articles_content');
     }
-
 }

@@ -1,13 +1,14 @@
-<?php namespace Modules\Site\Listeners;
+<?php
+
+namespace Modules\Site\Listeners;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Blog\Entities\Post;
 use Modules\Site\Entities\Page;
 use Vain\Events\BackendMenuCreated;
 use Vain\Events\FrontendMenuCreated;
 
-class SiteMenuComposer {
-
+class SiteMenuComposer
+{
     /**
      * @param BackendMenuCreated $event
      */
@@ -24,18 +25,18 @@ class SiteMenuComposer {
      */
     public function composeFrontendMenu(FrontendMenuCreated $event)
     {
-        if ( Auth::guest() || ! policy(Page::class)->index(Auth::user()))
+        if (Auth::guest() || !policy(Page::class)->index(Auth::user())) {
             return;
+        }
 
         $event->handler->addChild('site::page.title.index')
             ->setUri('#')
             ->setExtra('icon', 'file-o');
 
-        foreach (Page::published()->get() as $page)
-        {
+        foreach (Page::published()->get() as $page) {
             $event->handler['site::page.title.index']->addChild($page->slug)
                 ->setLabel($page->content->title)
-                ->setUri(route('site.show', [ 'slug' => $page->slug ]))
+                ->setUri(route('site.show', ['slug' => $page->slug]))
                 ->setExtra('raw', true);
         }
     }
@@ -43,7 +44,8 @@ class SiteMenuComposer {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param \Illuminate\Events\Dispatcher $events
+     *
      * @return array
      */
     public function subscribe($events)

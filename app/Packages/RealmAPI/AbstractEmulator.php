@@ -1,14 +1,16 @@
-<?php namespace Vain\Packages\RealmAPI;
+<?php
 
-/**
+namespace Vain\Packages\RealmAPI;
+
+/*
  * Created by PhpStorm.
  * User: Otto
  * Date: 26.01.2015
  * Time: 20:36
  */
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Vain\Packages\RealmAPI\Models\Character;
 use Vain\Packages\RealmAPI\Services\SoapService;
@@ -23,12 +25,12 @@ abstract class AbstractEmulator
     const REALM_MANGOS = 2;
 
     /**
-     * @var $realm string
+     * @var string
      */
     protected $realm;
 
     /**
-     * @var $type int
+     * @var int
      */
     protected $type;
 
@@ -38,7 +40,7 @@ abstract class AbstractEmulator
     protected $connections;
 
     /**
-     * @var $soap SoapService
+     * @var SoapService
      */
     protected $soap;
 
@@ -60,12 +62,12 @@ abstract class AbstractEmulator
             ->configure($this->getSoapConfig($realm));
     }
 
-
     /**
-     * Get information about running realm (player online, uptime, ...)
+     * Get information about running realm (player online, uptime, ...).
+     *
      * @return array
      */
-    public abstract function getServerStatus();
+    abstract public function getServerStatus();
 
     // ToDo: some stuff that might be useful
     //public abstract function createAccount();
@@ -74,7 +76,7 @@ abstract class AbstractEmulator
     //public abstract function muteAccount();
 
     /**
-     * Returns the realm id
+     * Returns the realm id.
      *
      * @return int
      */
@@ -84,17 +86,19 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Get character name by GUID
+     * Get character name by GUID.
      *
      * @param int $guid
-     * @return String|null
+     *
+     * @return string|null
      */
     public function getCharacterNameByGuid($guid)
     {
         $key = $this->cacheKey(__FUNCTION__, $guid);
 
-        if ($this->useCache && Cache::has($key))
+        if ($this->useCache && Cache::has($key)) {
             return Cache::get($key);
+        }
 
         $name = DB::connection($this->connections['world'])
             ->table('characters')
@@ -107,16 +111,19 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Get GUID by character name
+     * Get GUID by character name.
+     *
      * @param string $name
+     *
      * @return int|null
      */
     public function getCharacterGuidByName($name)
     {
         $key = $this->cacheKey(__FUNCTION__, $name);
 
-        if ($this->useCache && Cache::has($key))
+        if ($this->useCache && Cache::has($key)) {
             return Cache::get($key);
+        }
 
         $guid = DB::connection($this->connections['characters'])
             ->table('characters')
@@ -129,15 +136,17 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Get associative array (guid => name) of all players online
+     * Get associative array (guid => name) of all players online.
+     *
      * @return array
      */
     public function getPlayersOnline()
     {
         $key = $this->cacheKey(__FUNCTION__);
 
-        if ($this->useCache && Cache::has($key))
+        if ($this->useCache && Cache::has($key)) {
             return Cache::get($key);
+        }
 
         $list = DB::connection($this->connections['characters'])
             ->table('characters')
@@ -150,17 +159,21 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Get character by GUID
+     * Get character by GUID.
+     *
      * @param int $guid
-     * @return Character
+     *
      * @throws InvalidArgumentException
+     *
+     * @return Character
      */
     public function getCharacter($guid)
     {
         $key = $this->cacheKey(__FUNCTION__, $guid);
 
-        if ($this->useCache && Cache::has($key))
+        if ($this->useCache && Cache::has($key)) {
             return Cache::get($key);
+        }
 
         $char = Character::on($this->connections['characters'])
             ->find($guid, ['guid', 'account', 'name', 'race', 'class', 'level', 'money']);
@@ -171,7 +184,8 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Send a mail to a player (text only)
+     * Send a mail to a player (text only).
+     *
      * @param string $name
      * @param string $subject
      * @param string $message
@@ -183,7 +197,8 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Send a global message to all players online in chat log
+     * Send a global message to all players online in chat log.
+     *
      * @param string $message
      * @returns bool
      */
@@ -193,7 +208,8 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Get characters by account id
+     * Get characters by account id.
+     *
      * @param int $accountId
      * @returns \Illuminate\Database\Eloquent\Collection|null
      */
@@ -201,8 +217,9 @@ abstract class AbstractEmulator
     {
         $key = $this->cacheKey(__FUNCTION__, $accountId);
 
-        if ($this->useCache && Cache::has($key))
+        if ($this->useCache && Cache::has($key)) {
             return Cache::get($key);
+        }
 
         $chars = Character::on($this->connections['characters'])
             ->where('account', $accountId)
@@ -214,16 +231,18 @@ abstract class AbstractEmulator
     }
 
     /**
-     * Send items to a player
-     * @param string $name
+     * Send items to a player.
+     *
+     * @param string    $name
      * @param array|int $items
      * @returns boolean
      */
     public function sendItems($name, $items)
     {
-        if (is_array($items))
-            $items = implode($items, " ");
+        if (is_array($items)) {
+            $items = implode($items, ' ');
+        }
 
-        return $this->soap->send('send items '.$name.' "Premium System" "" ' . $items) !== false;
+        return $this->soap->send('send items '.$name.' "Premium System" "" '.$items) !== false;
     }
 }

@@ -32,6 +32,7 @@ trait UserTrait
             if (!method_exists(config('auth.model'), 'bootSoftDeletes')) {
                 $user->roles()->sync([]);
             }
+
             return true;
         });
     }
@@ -49,7 +50,7 @@ trait UserTrait
             return $this->roles->contains('name', $name);
         }
 
-        return !! $name->intersect($this->roles)->count();
+        return (bool) $name->intersect($this->roles)->count();
     }
 
     /**
@@ -101,7 +102,7 @@ trait UserTrait
     }
 
     /**
-     * Attach multiple roles to a user
+     * Attach multiple roles to a user.
      *
      * @param mixed $roles
      */
@@ -113,13 +114,15 @@ trait UserTrait
     }
 
     /**
-     * Detach multiple roles from a user
+     * Detach multiple roles from a user.
      *
      * @param mixed $roles
      */
     public function detachRoles($roles = null)
     {
-        if (!$roles) $roles = $this->roles()->get();
+        if (!$roles) {
+            $roles = $this->roles()->get();
+        }
 
         foreach ($roles as $role) {
             $this->detachRole($role);

@@ -1,5 +1,7 @@
-<?php namespace Modules\Blog\Entities;
-   
+<?php
+
+namespace Modules\Blog\Entities;
+
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -8,8 +10,8 @@ use Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;
 use Vain\Packages\Translator\Translatable;
 use Vain\Packages\Translator\TranslatableTrait;
 
-class Post extends Model implements Translatable {
-
+class Post extends Model implements Translatable
+{
     use SoftDeletes, TranslatableTrait, LocalizedEloquentTrait;
 
     /**
@@ -63,27 +65,27 @@ class Post extends Model implements Translatable {
 
     /**
      * @param Builder $query
+     *
      * @return mixed
      */
     public function scopePublished($query)
     {
-        return $query->where(function($query) {
+        return $query->where(function ($query) {
 
-            $query->where(function($query) {
+            $query->where(function ($query) {
                 $query->where('published_at', '<=', Carbon::now())
                     ->orWhere('published_at', null);
             });
 
-            $query->where(function($query) {
+            $query->where(function ($query) {
                 $query->where('concealed_at', '>', Carbon::now())
                     ->orWhere('concealed_at', null);
             });
         });
     }
 
-
     /**
-     * fix optional empty dates
+     * fix optional empty dates.
      *
      * @param $value
      */
@@ -95,7 +97,7 @@ class Post extends Model implements Translatable {
     }
 
     /**
-     * fix optional empty dates
+     * fix optional empty dates.
      *
      * @param $value
      */

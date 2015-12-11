@@ -13,6 +13,7 @@ trait PermissionTrait
     {
         return $this->belongsToMany(config('access.role'), config('access.permission_role_table'));
     }
+
     /**
      * Boot the permission model
      * Attach event listener to remove the many-to-many records when trying to delete
@@ -23,10 +24,11 @@ trait PermissionTrait
     public static function boot()
     {
         parent::boot();
-        static::deleting(function($permission) {
+        static::deleting(function ($permission) {
             if (!method_exists(config('access.permission'), 'bootSoftDeletes')) {
                 $permission->roles()->sync([]);
             }
+
             return true;
         });
     }

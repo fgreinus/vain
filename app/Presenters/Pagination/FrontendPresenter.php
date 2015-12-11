@@ -1,4 +1,6 @@
-<?php namespace Vain\Presenters\Pagination;
+<?php
+
+namespace Vain\Presenters\Pagination;
 
 use Illuminate\Pagination\BootstrapThreePresenter;
 

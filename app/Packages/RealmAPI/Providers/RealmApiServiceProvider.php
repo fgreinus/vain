@@ -1,9 +1,11 @@
-<?php namespace Vain\Packages\RealmAPI\Providers;
+<?php
+
+namespace Vain\Packages\RealmAPI\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class RealmApiServiceProvider extends ServiceProvider {
-
+class RealmApiServiceProvider extends ServiceProvider
+{
     /**
      * @var bool
      */
@@ -46,5 +48,4 @@ class RealmApiServiceProvider extends ServiceProvider {
         $this->app->bind('Vain\Packages\RealmAPI\EmulatorFactory');
         $this->app->bind('Vain\Packages\RealmAPI\Services\SoapService');
     }
-
 }

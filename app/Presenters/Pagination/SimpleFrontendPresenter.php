@@ -1,4 +1,6 @@
-<?php namespace Vain\Presenters\Pagination;
+<?php
+
+namespace Vain\Presenters\Pagination;
 
 use Illuminate\Pagination\SimpleBootstrapThreePresenter;
 
@@ -6,8 +8,7 @@ class SimpleFrontendPresenter extends SimpleBootstrapThreePresenter
 {
     public function render()
     {
-        if ($this->hasPages())
-        {
+        if ($this->hasPages()) {
             return sprintf(
                 '<div class="paging clearfix">%s %s</div>',
                 $this->getPreviousButton(trans('pagination.newer')),
@@ -44,7 +45,7 @@ class SimpleFrontendPresenter extends SimpleBootstrapThreePresenter
         // If the current page is greater than or equal to the last page, it means we
         // can't go any further into the pages, as we're already on this last page
         // that is available, so we will make it the "next" link style disabled.
-        if (! $this->paginator->hasMorePages()) {
+        if (!$this->paginator->hasMorePages()) {
             return '';
         }
 

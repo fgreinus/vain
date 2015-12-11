@@ -1,4 +1,6 @@
-<?php namespace Vain\Presenters\Menu;
+<?php
+
+namespace Vain\Presenters\Menu;
 
 use Knp\Menu\ItemInterface;
 
@@ -6,7 +8,7 @@ class FrontendPresenter extends VainPresenter
 {
     protected function renderList(ItemInterface $item, array $attributes, array $options)
     {
-        /**
+        /*
          * Return an empty string if any of the following are true:
          *   a) The menu has no children eligible to be displayed
          *   b) The depth is 0
@@ -16,8 +18,7 @@ class FrontendPresenter extends VainPresenter
             return '';
         }
 
-        if ($item->getLevel() === 0)
-        {
+        if ($item->getLevel() === 0) {
             // in the first level we do not need a wrapping ul-tag
             return $this->renderChildren($item, $options);
         }
@@ -28,7 +29,8 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderItem(ItemInterface $item, array $options)
@@ -39,7 +41,7 @@ class FrontendPresenter extends VainPresenter
         }
 
         // create an array than can be imploded as a class list
-        $class = (array)$item->getAttribute('class');
+        $class = (array) $item->getAttribute('class');
 
         if ($this->matcher->isCurrent($item)
             || $this->matcher->isAncestor($item, $options['matchingDepth'])
@@ -59,7 +61,7 @@ class FrontendPresenter extends VainPresenter
 
         // opening li tag
         $html = $this->format(
-            '<li' . $this->renderHtmlAttributes($attributes) . '>',
+            '<li'.$this->renderHtmlAttributes($attributes).'>',
             'li',
             $item->getLevel(),
             $options
@@ -69,7 +71,7 @@ class FrontendPresenter extends VainPresenter
         $html .= $this->renderLink($item, $options);
 
         // renders the embedded ul
-        $childrenClass = (array)$item->getChildrenAttribute('class');
+        $childrenClass = (array) $item->getChildrenAttribute('class');
         $childrenClass[] = 'submenu-list';
 
         $childrenAttributes = $item->getChildrenAttributes();
@@ -85,7 +87,8 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderLinkElement(ItemInterface $item, array $options)
@@ -102,23 +105,25 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderIcon(ItemInterface $item, array $options = [])
     {
         if ($item->getExtra('icon', null) !== null) {
-            return $this->renderIconElement( $item, $options );
+            return $this->renderIconElement($item, $options);
         }
 
         return '';
     }
 
     /**
-     * unless 'raw' extra isn't set to true, we try to translate the label
+     * unless 'raw' extra isn't set to true, we try to translate the label.
      *
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderLabel(ItemInterface $item, array $options)
@@ -136,7 +141,8 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderFolding(ItemInterface $item, array $options = [])
@@ -150,7 +156,8 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderIconElement(ItemInterface $item, array $options = [])
@@ -160,7 +167,8 @@ class FrontendPresenter extends VainPresenter
 
     /**
      * @param ItemInterface $item
-     * @param array $options
+     * @param array         $options
+     *
      * @return string
      */
     protected function renderFoldingElement(ItemInterface $item, array $options = [])

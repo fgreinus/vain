@@ -2,28 +2,28 @@
 
 return [
     'title' => [
-        'index' => 'Blog',
+        'index'  => 'Blog',
         'teaser' => 'Its about time that you get up to date!',
-        'post' => 'Blog: :name'
+        'post'   => 'Blog: :name',
     ],
     'index' => 'Blog',
-    'post' => [
+    'post'  => [
         'more' => 'Read more...',
     ],
     'comment' => [
         'save' => [
-            'error' => 'An error occurred while trying to store your comment',
+            'error'   => 'An error occurred while trying to store your comment',
             'success' => 'Comment successfully created',
-            'button' => 'Comment'
+            'button'  => 'Comment',
         ],
         'delete' => [
-            'error' => 'Error when trying to delete the comment',
+            'error'   => 'Error when trying to delete the comment',
             'success' => 'Comment successfully deleted',
-            'button' => 'Delete'
+            'button'  => 'Delete',
         ],
-        'write' => 'Write new comment',
+        'write'       => 'Write new comment',
         'placeholder' => 'Now it\'s time for your comment...',
-        'count' => ':count Comment|:count Comments',
-        'credits' => 'posted at :time by',
-    ]
+        'count'       => ':count Comment|:count Comments',
+        'credits'     => 'posted at :time by',
+    ],
 ];

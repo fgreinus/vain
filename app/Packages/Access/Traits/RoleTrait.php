@@ -36,11 +36,12 @@ trait RoleTrait
     public static function boot()
     {
         parent::boot();
-        static::deleting(function($role) {
+        static::deleting(function ($role) {
             if (!method_exists(config('access.role'), 'bootSoftDeletes')) {
                 $role->users()->sync([]);
                 $role->perms()->sync([]);
             }
+
             return true;
         });
     }
@@ -75,6 +76,7 @@ trait RoleTrait
                 }
             }
         }
+
         return false;
     }
 
@@ -121,10 +123,12 @@ trait RoleTrait
      */
     public function detachPermission($permission)
     {
-        if (is_object($permission))
+        if (is_object($permission)) {
             $permission = $permission->getKey();
-        if (is_array($permission))
+        }
+        if (is_array($permission)) {
             $permission = $permission['id'];
+        }
         $this->perms()->detach($permission);
     }
 
@@ -143,7 +147,7 @@ trait RoleTrait
     }
 
     /**
-     * Detach multiple permissions from current role
+     * Detach multiple permissions from current role.
      *
      * @param mixed $permissions
      *

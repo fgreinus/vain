@@ -1,4 +1,6 @@
-<?php namespace Vain\Policies;
+<?php
+
+namespace Vain\Policies;
 
 abstract class Policy
 {

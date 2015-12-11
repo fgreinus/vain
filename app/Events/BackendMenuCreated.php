@@ -1,4 +1,7 @@
-<?php namespace Vain\Events;
+<?php
 
-class BackendMenuCreated extends MenuCreated {
+namespace Vain\Events;
+
+class BackendMenuCreated extends MenuCreated
+{
 }

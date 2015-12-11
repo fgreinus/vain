@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Providers;
+<?php
+
+namespace Modules\User\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -18,7 +20,8 @@ class AuthServiceProvider extends ServiceProvider
     /**
      * Register any application authentication / authorization services.
      *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
+     * @param \Illuminate\Contracts\Auth\Access\Gate $gate
+     *
      * @return void
      */
     public function boot(GateContract $gate)
@@ -32,14 +35,14 @@ class AuthServiceProvider extends ServiceProvider
 //        });
 
         foreach ($this->getPermission() as $permission) {
-            $gate->define($permission->name, function($user) use ($permission) {
+            $gate->define($permission->name, function ($user) use ($permission) {
                 return $user->hasRole($permission->roles);
             });
         }
     }
 
     /**
-     * Returns an empty error in case of non-existend database (i.e. when working with a newly deployed system)
+     * Returns an empty error in case of non-existend database (i.e. when working with a newly deployed system).
      *
      * @return array|\Illuminate\Database\Eloquent\Collection|static[]
      */

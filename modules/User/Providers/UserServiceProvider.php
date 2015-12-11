@@ -1,11 +1,13 @@
-<?php namespace Modules\User\Providers;
+<?php
+
+namespace Modules\User\Providers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class UserServiceProvider extends ServiceProvider {
-
+class UserServiceProvider extends ServiceProvider
+{
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -43,18 +45,16 @@ class UserServiceProvider extends ServiceProvider {
     }
 
     /**
-     * composes admin views
+     * composes admin views.
      */
     protected function composeViews()
     {
         // user menu in app
-        View::composer('app', function($view)
-        {
+        View::composer('app', function ($view) {
             $view->getFactory()->inject('account', view('user::menu', ['guest' => Auth::guest(), 'user' => Auth::user()]));
         });
 
-        View::composer('admin', function($view)
-        {
+        View::composer('admin', function ($view) {
             // user menu in admin menu
             $view->getFactory()->inject('account', view('user::admin.partials.account', ['user' => Auth::user()]));
 

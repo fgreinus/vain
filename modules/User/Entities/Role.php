@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Entities;
+<?php
+
+namespace Modules\User\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravelrus\LocalizedCarbon\Traits\LocalizedEloquentTrait;

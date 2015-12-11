@@ -1,10 +1,12 @@
-<?php namespace Modules\Blog\Entities;
-   
+<?php
+
+namespace Modules\Blog\Entities;
+
 use Illuminate\Database\Eloquent\Model;
 use Vain\Packages\Translator\TranslatableContentTrait;
 
-class CategoryContent extends Model {
-
+class CategoryContent extends Model
+{
     use TranslatableContentTrait;
 
     /**

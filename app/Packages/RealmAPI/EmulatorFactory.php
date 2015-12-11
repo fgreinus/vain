@@ -1,4 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI;
+<?php
+
+namespace Vain\Packages\RealmAPI;
 
 use InvalidArgumentException;
 
@@ -6,21 +8,20 @@ use InvalidArgumentException;
  * Created by PhpStorm.
  * User: Otto
  * Date: 26.01.2015
- * Time: 20:52
+ * Time: 20:52.
  */
-
 class EmulatorFactory
 {
     use Configurator;
 
     /**
-     * saves resolved instances as singletons
+     * saves resolved instances as singletons.
      *
      * @var AbstractEmulator[]
      */
     protected $instances;
 
-    function __construct()
+    public function __construct()
     {
         $this->instances = [];
     }
@@ -28,17 +29,15 @@ class EmulatorFactory
     /**
      * @param $realm
      * @param bool $useCache
+     *
      * @return AbstractEmulator
      */
     public function connection($realm, $useCache = true)
     {
-        if (array_key_exists($realm, $this->instances))
-        {
+        if (array_key_exists($realm, $this->instances)) {
             // since we can modify the cache we may update the singleton
             $this->instances[ $realm ]->setUseCache($useCache);
-        }
-        else
-        {
+        } else {
             // resolve new instance
             $this->instances[ $realm ] = $this->resolveEmulator($realm, $useCache);
         }
@@ -49,14 +48,14 @@ class EmulatorFactory
     /**
      * @param $realm
      * @param $useCache
+     *
      * @return AbstractEmulator
      */
     protected function resolveEmulator($realm, $useCache)
     {
         $type = $this->getTypeConfig($realm);
 
-        switch ($type)
-        {
+        switch ($type) {
             case AbstractEmulator::REALM_TRINITY:
                 return new TrinityEmulator($realm, $useCache);
 
@@ -64,7 +63,7 @@ class EmulatorFactory
                 return new MangosEmulator($realm, $useCache);
 
             default:
-                throw new InvalidArgumentException('Unsupported realm type \''. $type .'\'');
+                throw new InvalidArgumentException('Unsupported realm type \''.$type.'\'');
         }
     }
 }

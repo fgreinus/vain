@@ -1,15 +1,17 @@
-<?php namespace Modules\User\Http\Controllers\Auth;
+<?php
+
+namespace Modules\User\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\One\User as OneUser;
+use Laravel\Socialite\Two\User as TwoUser;
 use Modules\User\Entities\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Vain\Http\Controllers\Controller;
-use Laravel\Socialite\One\User as OneUser;
-use Laravel\Socialite\Two\User as TwoUser;
 
-class SocialController extends Controller {
-
+class SocialController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Social Auth Controller
@@ -21,23 +23,25 @@ class SocialController extends Controller {
     */
 
     /**
-     * redirect to after successfull auth
+     * redirect to after successfull auth.
+     *
      * @var string
      */
     protected $redirectPath = '/home';
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws HttpException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect(Request $request)
     {
         $provider = $request->get('provider');
 
-        if ($provider === null)
-        {
-            throw new HttpException(500, "provider necessary");
+        if ($provider === null) {
+            throw new HttpException(500, 'provider necessary');
         }
 
         return \Socialize::with($provider)->redirect();
@@ -45,16 +49,17 @@ class SocialController extends Controller {
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     *
      * @throws HttpException
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request)
     {
         $provider = $request->get('provider');
 
-        if ($provider === null)
-        {
-            throw new HttpException(500, "provider necessary");
+        if ($provider === null) {
+            throw new HttpException(500, 'provider necessary');
         }
 
         /** @var OneUser|TwoUser $data */
@@ -64,13 +69,12 @@ class SocialController extends Controller {
         $user = User::where('email', $data->getEmail())
             ->first();
 
-        if ($user === null)
-        {
+        if ($user === null) {
             // we have to register him as a new user
             $user = User::create([
-                'name' => $data->getName(),
-                'email' => $data->getEmail(),
-                'password' => '' ]);
+                'name'     => $data->getName(),
+                'email'    => $data->getEmail(),
+                'password' => '', ]);
         }
 
         // login as db user
@@ -79,4 +83,3 @@ class SocialController extends Controller {
         return redirect($this->redirectPath);
     }
 }
-

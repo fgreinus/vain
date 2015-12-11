@@ -1,4 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI\Models;
+<?php
+
+namespace Vain\Packages\RealmAPI\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Lang;
@@ -33,7 +35,7 @@ class Character extends Model
      */
     public function getRacenameAttribute()
     {
-        return Lang::get('realmapi::races.'. $this->race);
+        return Lang::get('realmapi::races.'.$this->race);
     }
 
     /**
@@ -41,7 +43,6 @@ class Character extends Model
      */
     public function getClassnameAttribute()
     {
-        return Lang::get('realmapi::classes.'. $this->class);
+        return Lang::get('realmapi::classes.'.$this->class);
     }
-
 }

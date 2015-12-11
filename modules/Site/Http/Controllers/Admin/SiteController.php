@@ -1,4 +1,6 @@
-<?php namespace Modules\Site\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Site\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -8,9 +10,9 @@ use Modules\Site\Http\Requests\PageFormRequest;
 use Modules\User\Entities\Role;
 use Modules\User\Entities\User;
 
-class SiteController extends Controller {
-
-    function __construct()
+class SiteController extends Controller
+{
+    public function __construct()
     {
         $this->middleware('permission:site.page.show', ['only' => ['index', 'show']]);
         $this->middleware('permission:site.page.create', ['only' => ['create', 'store']]);
@@ -29,7 +31,7 @@ class SiteController extends Controller {
     public function create()
     {
         $roles = array_merge(
-            [ null => trans('site::page.role.none') ],
+            [null => trans('site::page.role.none')],
             Role::lists('display_name', 'name')->all()
         );
 
@@ -46,8 +48,7 @@ class SiteController extends Controller {
         $page->user()->associate($request->user());
         $page->save();
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = (new Content())
                 ->fillTranslated($locale, $request->all());
 
@@ -63,7 +64,7 @@ class SiteController extends Controller {
         $page = Page::find($id);
 
         $roles = array_merge(
-            [ null => trans('site::page.role.none') ],
+            [null => trans('site::page.role.none')],
             Role::lists('display_name', 'name')->all()
         );
 
@@ -80,8 +81,7 @@ class SiteController extends Controller {
         $page->fill($request->all());
         $page->save();
 
-        foreach (config('app.locales') as $locale => $name)
-        {
+        foreach (config('app.locales') as $locale => $name) {
             $content = $page->contents()
                 ->localeOrNew($locale)
                 ->fillTranslated($locale, $request->all());
@@ -102,6 +102,7 @@ class SiteController extends Controller {
 
     /**
      * @param $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     protected function createDefaultResponse($request)

@@ -1,11 +1,13 @@
-<?php namespace Modules\User\Http\Controllers\Admin;
+<?php
+
+namespace Modules\User\Http\Controllers\Admin;
 
 use Modules\User\Entities\Permission;
 use Vain\Http\Controllers\Controller;
 
-class PermissionController extends Controller {
-
-    function __construct()
+class PermissionController extends Controller
+{
+    public function __construct()
     {
         // we do not wan't a change in permissions since they
         // only should be modified from module migrations
@@ -13,7 +15,7 @@ class PermissionController extends Controller {
         $this->middleware('permission:user.permission.show');
     }
 
-    function index()
+    public function index()
     {
         $permissions = Permission::paginate();
 

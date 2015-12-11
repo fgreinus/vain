@@ -1,9 +1,11 @@
-<?php namespace Modules\User\Listeners;
+<?php
+
+namespace Modules\User\Listeners;
 
 use Vain\Events\BackendMenuCreated;
 
-class UserMenuComposer {
-
+class UserMenuComposer
+{
     /**
      * @param BackendMenuCreated $event
      */
@@ -33,7 +35,8 @@ class UserMenuComposer {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param  \Illuminate\Events\Dispatcher  $events
+     * @param \Illuminate\Events\Dispatcher $events
+     *
      * @return array
      */
     public function subscribe($events)

@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers;
+<?php
+
+namespace Modules\Blog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\Blog\Entities\Comment;
@@ -38,6 +40,7 @@ class CommentController extends Controller
 
     /**
      * @param Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     protected function createDefaultResponse($request)

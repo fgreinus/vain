@@ -4,7 +4,6 @@ namespace Vain\Packages\Access\Contracts;
 
 interface PermissionInterface
 {
-
     /**
      * Many-to-Many relations with role model.
      *

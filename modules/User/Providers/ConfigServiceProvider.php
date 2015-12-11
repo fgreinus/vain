@@ -1,9 +1,11 @@
-<?php namespace Modules\User\Providers;
+<?php
+
+namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class ConfigServiceProvider extends ServiceProvider {
-
+class ConfigServiceProvider extends ServiceProvider
+{
     /**
      * Overwrite any vendor / package configuration.
      *
@@ -34,7 +36,7 @@ class ConfigServiceProvider extends ServiceProvider {
 
     /**
      * we just prioritize our service provider over the config from
-     * other packages
+     * other packages.
      *
      * @param string $path
      * @param string $key

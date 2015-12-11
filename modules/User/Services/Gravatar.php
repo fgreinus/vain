@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Services;
+<?php
+
+namespace Modules\User\Services;
 
 class Gravatar
 {
@@ -24,7 +26,7 @@ class Gravatar
     const DEFAULT_BLANK = 'blank';
 
     /**
-     * rating levels for avatars
+     * rating levels for avatars.
      */
     const RATING_SAFE = 'g';
 
@@ -35,24 +37,27 @@ class Gravatar
     const RATING_ADULT = 'x';
 
     /**
-     * Size in pixels
+     * Size in pixels.
+     *
      * @var int
      */
     protected $size;
 
     /**
-     * Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+     * Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ].
+     *
      * @var string
      */
     protected $default;
 
     /**
-     * Maximum rating (inclusive) [ g | pg | r | x ]
+     * Maximum rating (inclusive) [ g | pg | r | x ].
+     *
      * @var string
      */
     protected $rating;
 
-    function __construct()
+    public function __construct()
     {
         $this->size = 80;
         $this->default = self::DEFAULT_MAN;
@@ -69,9 +74,10 @@ class Gravatar
 
     /**
      * @param int $size
+     *
      * @return $this
      */
-    public function setSize( $size )
+    public function setSize($size)
     {
         $this->size = $size;
 
@@ -88,9 +94,10 @@ class Gravatar
 
     /**
      * @param string $default
+     *
      * @return $this
      */
-    public function setDefault( $default )
+    public function setDefault($default)
     {
         $this->default = $default;
 
@@ -107,9 +114,10 @@ class Gravatar
 
     /**
      * @param string $rating
+     *
      * @return $this
      */
-    public function setRating( $rating )
+    public function setRating($rating)
     {
         $this->rating = $rating;
 
@@ -120,12 +128,14 @@ class Gravatar
      * Get either a Gravatar URL or complete image tag for a specified email address.
      *
      * @param string $email The email address
-     * @return String containing either just a URL or a complete image tag
+     *
+     * @return string containing either just a URL or a complete image tag
      * @source http://gravatar.com/site/implement/images/php/
      */
-    function getGravatar($email)
+    public function getGravatar($email)
     {
         $hash = md5(strtolower(trim($email)));
-        return sprintf("http://www.gravatar.com/avatar/%s?s=%d&d=%s&r=%s", $hash, $this->getSize(), $this->getDefault(), $this->getRating());
+
+        return sprintf('http://www.gravatar.com/avatar/%s?s=%d&d=%s&r=%s', $hash, $this->getSize(), $this->getDefault(), $this->getRating());
     }
 }

@@ -1,5 +1,6 @@
-<?php namespace Vain\Packages\RealmAPI;
+<?php
 
+namespace Vain\Packages\RealmAPI;
 
 trait Cacheable
 {
@@ -13,16 +14,17 @@ trait Cacheable
      */
     protected $cacheDuration;
 
-    function __construct()
+    public function __construct()
     {
         $this->cacheDuration = Carbon::now()->addMinutes(10);
     }
 
     /**
-     * @param boolean $useCache
+     * @param bool $useCache
+     *
      * @return $this
      */
-    public function setUseCache( $useCache )
+    public function setUseCache($useCache)
     {
         $this->useCache = $useCache;
 
@@ -31,9 +33,10 @@ trait Cacheable
 
     /**
      * @param int $cacheDuration
+     *
      * @return $this
      */
-    public function setCacheDuration( $cacheDuration )
+    public function setCacheDuration($cacheDuration)
     {
         $this->cacheDuration = $cacheDuration;
 
@@ -42,10 +45,10 @@ trait Cacheable
 
     /**
      * generates a cache key by passed args
-     * realm id and realm type will automatically supplemented
+     * realm id and realm type will automatically supplemented.
      */
     protected function cacheKey()
     {
-        return implode('-', array_merge(func_get_args(), [ $this->type, $this->realm ]));
+        return implode('-', array_merge(func_get_args(), [$this->type, $this->realm]));
     }
 }

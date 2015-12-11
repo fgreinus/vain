@@ -1,13 +1,16 @@
-<?php namespace Modules\Support\Policies;
+<?php
+
+namespace Modules\Support\Policies;
 
 use Modules\Support\Entities\Category;
 use Modules\User\Entities\User;
 use Vain\Policies\Policy;
 
-class CategoryPolicy extends Policy {
-
+class CategoryPolicy extends Policy
+{
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function index($user)
@@ -17,6 +20,7 @@ class CategoryPolicy extends Policy {
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function show($user)
@@ -26,6 +30,7 @@ class CategoryPolicy extends Policy {
 
     /**
      * @param User $user
+     *
      * @return bool
      */
     public function create($user)
@@ -34,8 +39,9 @@ class CategoryPolicy extends Policy {
     }
 
     /**
-     * @param User $user
+     * @param User     $user
      * @param Category $category
+     *
      * @return bool
      */
     public function edit($user, $category)
@@ -45,8 +51,9 @@ class CategoryPolicy extends Policy {
     }
 
     /**
-     * @param User $user
+     * @param User     $user
      * @param Category $category
+     *
      * @return bool
      */
     public function destroy($user, $category)
